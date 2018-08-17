@@ -34,7 +34,7 @@ if (!isset($uid)) {
 	<h1> Access Denied </h1>
 	<p>Your user ID or password is incorrect, or you are not a
 	registered user on this site. To try logging in again, click
-	<a href="http://clagettresidential.com/MRP/">here</a>.</p>
+	<a href="../index.php">here</a>.</p>
 	</body>
 	</html>
 	<?php

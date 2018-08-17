@@ -1,8 +1,8 @@
 <?php
 session_start();
-include_once('include/auth.php');
-include_once('include/config.php');
-include_once('include/mailer.php');
+//include_once('../include/auth.php');
+include_once('../include/config.php');
+include_once('../include/mailer.php');
 
 //if ($_SESSION['type'] != 'admin') {
 //    echo "<meta http-equiv='refresh' content='0'>";
@@ -130,7 +130,7 @@ include_once('include/mailer.php');
         //$minlen = $config['MinPasswordLength'];
         //$admin_email = $config['AdminEmail'];
 
-		$sql = "SELECT UserName, UserEmail FROM userdata WHERE UserID IS NOT NULL AND IsUserActive = 'true'";
+		$sql = "SELECT UserName, UserEmail FROM user_data WHERE UserActive = 'true'";
 		$query = mysqli_query($conn, $sql);
 		while ($rows = mysqli_fetch_array($query)) {
 			$usernames[] = $rows['UserName'];
@@ -173,28 +173,30 @@ include_once('include/mailer.php');
 			if (!preg_match("#\W+#", $new_password)) {
 				$error .= 'password must contain at least one special character.<br /><br />';
 			}
-			$new_password = addslashes(password_hash($new_password));
+			$new_password = addslashes(password_hash($new_password, PASSWORD_DEFAULT));
 			$tmp_pswd = false;
 			$new_change_password = "false";
 		} else {
 			//$new_password = substr(md5(uniqid()),0,10);  // First 10 characters of an MD5 hashed uniqueID generated from timestamp
-			$new_password = substr(password_hash(uniqid()),0,10);  // First 10 characters of an MD5 hashed uniqueID generated from timestamp
+			$new_password = substr(password_hash(uniqid(), PASSWORD_DEFAULT),0,10);  // First 10 characters of an MD5 hashed uniqueID generated from timestamp
 			$tmp_pswd = true;
 			$new_change_password = "true";
-		}		
+		}
+        /*
 		if (in_array($new_username, $usernames)) {
 			$error .= '<b>The UserName [ '.$new_username.' ] is already in use.</b><br /><br />';
 		}
 		if (in_array($new_email, $emails)) {
 			$error .= '<b>The email address [ '.$new_email.' ] is already registered to an account.</b><br /><br />';
 		}
+        */
 		if(strlen($error) > 0) {
 			died($error);
 		} 
 		else {
 			//$new_type = "standard";		
 			$new_isactive = "true";
-			$sql = "INSERT INTO userdata (UserName, UserPassword, RealName, UserEmail, UserActive) VALUES ('$new_username', '$new_password', '$new_realname', '$new_email', '$new_isactive')";
+			$sql = "INSERT INTO user_data (UserName, UserPassword, RealName, UserEmail, UserActive) VALUES ('$new_username', '$new_password', '$new_realname', '$new_email', '$new_isactive')";
 			$query = mysqli_query($conn, $sql);
 			if(!$query){die(mysqli_error($conn));}
 			else {
@@ -206,7 +208,10 @@ include_once('include/mailer.php');
 				if ($tmp_pswd) {
 					$message .= "A temporary password has been created for you to login. Please change this after logging in for your first time."."<br />";
 					$message .= "Temporary Password: ".$new_password."<br />";
-				}
+				} else {
+                    $message .= "Password: ".$new_password."<br />";
+                    $message .= "Hashed Password: ".$new_password."<br />";
+                }
 				$message .= "";
 				$mailer = new email();
 				$mailer->to_email = $new_email;
@@ -226,7 +231,7 @@ include_once('include/mailer.php');
 		}
 		if ($success) {
 			echo "<meta http-equiv='refresh' content='0'>";
-			echo "<script>alert('Successfully added new user to database records.'); window.history.go(-1);</script>";
+			echo "<script>alert('Successfully added new user to database records.'); window.location('tenmore.solutions');</script>";
 		} else {
 			echo "<meta http-equiv='refresh' content='0'>";
 			echo "<script>alert('An error was encountered adding new user to database records.'); window.history.go(-1);</script>";

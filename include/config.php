@@ -6,9 +6,9 @@ ini_set('display_errors', 1);// Display errors //
 
 // Database credentials //
 define('DB_SERVER', 'localhost');
-define('DB_USER', '***');
-define('DB_PASS', '***');
-define('DB_NAME', '***');
+define('DB_USER', 'mymelib-tmp');
+define('DB_PASS', 'mml@TMS69');
+define('DB_NAME', 'mymelib_dev');
 
 // FTP credentials //
 define('FTP_HOST', 'localhost');
@@ -40,26 +40,29 @@ if (!$conn) {
 }
 
 // Get configuration info from database //
+/*
 $config = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM configurationdata"));
 if ($config['AdminEmail'] != "") {
 	$admin_email = $config['AdminEmail'];
 } else {
     $admin_email = "bryceferguson.css@gmail.com";
 }
+*/
 
-
+/*
  //  //
- $a_genres = array();
+$a_genres = array();
 $query = mysqli_query($conn, "SELECT genre FROM audiodata WHERE exists = 'true'");
 while ($rows = mysqli_fetch_array($query)) {
 	$a_genres[$rows['genre']];
 }	
 //  //
- $v_genres = array();
+$v_genres = array();
 $query = mysqli_query($conn, "SELECT genre FROM videodata WHERE exists = 'true'");
 while ($rows = mysqli_fetch_array($query)) {
 	$v_genres[$rows['genre']];
 }
+
 
 
 //  //
@@ -68,7 +71,7 @@ $query = mysqli_query($conn, "SELECT artist FROM audiodata WHERE artist IS NOT N
 while ($rows = mysqli_fetch_array($query)) {
 	$a_artists[$rows['artist']];
 }
-
+*/
 
 	
 

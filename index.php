@@ -1,15 +1,15 @@
 <?php
 session_start();
-include('login.php');
+include('include/login.php');
 
 if(isset($_SESSION["usr"])){
-	header("location: default.html");
-}
+	header("location: pages/index.php");
+} else {
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login Form</title>
+<title>MyMeLib | Login</title>
 <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -29,3 +29,6 @@ if(isset($_SESSION["usr"])){
 </div>
 </body>
 </html>
+
+<?php
+}

@@ -1,11 +1,6 @@
 <?php
-ini_set('date.timezone', 'America/New_York');
+include_once('include/config.php');
 
-// Connect to SQL database //
-define('DB_SERVER', 'localhost');
-define('DB_USER', '***');
-define('DB_PASS', '***');
-define('DB_NAME', '***');
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
 

@@ -30,6 +30,9 @@ $email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+.[A-Za-z0-9._%-]+$/';
 $phone_exp = '/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})+$/';
 $string_exp = "/^[A-Za-z .'-]+$/";
 
+$from_email = "noreply@tenmore.solutions";
+$reply_email = "noreply@tenmore.solutions";
+
 // Establish connection with MySQL database //
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 if (!$conn) {
@@ -41,7 +44,7 @@ $config = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM configurationdat
 if ($config['AdminEmail'] != "") {
 	$admin_email = $config['AdminEmail'];
 } else {
-    $admin_email = "bferguson2017@gmail.com";
+    $admin_email = "bryceferguson.css@gmail.com";
 }
 
 

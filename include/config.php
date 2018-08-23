@@ -21,7 +21,7 @@ $videoPlayerPathname = 'C:\Program Files (x86)\MPC-HC\mpc-hc-gpu.exe';
 // Optional switches for opening files //
 $videoPlayerSwitches = '/play /fullscreen';
 
-$upload_dir = "../temp/";
+$upload_dir = "tmp/";
 
 $video_dir = "C:/FergShare/Public_Content/Video";
 $video_ext = ['avi','mkv','mp4','mov','wmv'];

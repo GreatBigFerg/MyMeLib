@@ -137,7 +137,7 @@ $name = $_SESSION["name"];
 		<?php } ?>
 	</div>
     <div>
-        <form action="" method="post">
+        <form enctype="multipart/form-data" action="" method="post">
              <input type="file" name="uploaded_file">
             <br>
             <input type="submit" value="Upload">
@@ -171,6 +171,23 @@ $name = $_SESSION["name"];
 </html>
 <?php
 
+$upload_dir = "tmp/";
+
+if(!is_dir($upload_dir)){
+    throw new Exception($upload_dir . ' does not exist!');
+} else{
+    echo 'The directory "' . $upload_dir . '" does exist.<br>';
+}
+ 
+if(!is_writable($upload_dir)){
+    throw new Exception($upload_dir . ' is not writable!');
+} else{
+    echo 'The directory "' . $upload_dir . '" is writable. All is good.<br>';
+}
+
+echo var_dump($_FILES);
+
+/*
 if(!empty($_FILES['uploaded_file']))
   {
     $path = "uploads/";
@@ -182,14 +199,14 @@ if(!empty($_FILES['uploaded_file']))
         echo "There was an error uploading the file, please try again!";
     }
   }
-/*
+*/
 if (isset($_POST['Upload'])) { //!empty($_FILES["file"])
     $upload = $_FILES["file"];
-    if ($upload["error"] !== UPLOAD_ERR_OK) {
-        echo "<p>An error occurred.</p>";
-        exit;
-    }
-    echo "<h1>HELLO</h1>";
+    //if ($upload["error"] !== UPLOAD_ERR_OK) {
+        //echo "<p>An error occurred.</p>";
+        //exit;
+    //}
+    //echo "<h1>HELLO</h1>";
     
     $name = preg_replace("/[^A-Z0-9._-]/i", "_", $upload["name"]);   
     $success = move_uploaded_file($upload["tmp_name"], $upload_dir . $name);
@@ -200,4 +217,4 @@ if (isset($_POST['Upload'])) { //!empty($_FILES["file"])
     }
     echo "<h1>".$msg."</h1>";
 }
-*/
+

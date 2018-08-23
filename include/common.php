@@ -22,10 +22,10 @@ function get_music_list() {
 //  //
 function get_movie_list() {   
     $records = array();
-    $query = mysqli_query($conn, "SELECT id, MediaTitle, Genre FROM video_data WHERE ProgramName IS NULL AND exists = 'true'");
+    $query = mysqli_query($conn, "SELECT id, Title, Genre FROM video_data WHERE ProgramName IS NULL AND FileExists = 'true'");
     while ($rows = mysqli_fetch_array($query)) {
         $info = array();
-        $info['title'] = $rows['MediaTitle'];
+        $info['title'] = $rows['Title'];
         $info['genre'] = $rows['Genre'];
 	    $records[$rows['id']] = $info;
     }
@@ -34,58 +34,35 @@ function get_movie_list() {
 //  //
 function get_series_list() {
     $records = array();
-    $query = mysqli_query($conn, "SELECT id, MediaTitle, ProgramName, SeasonNumber, EpisodeNumber, Genre FROM video_data WHERE ProgramName IS NOT NULL AND exists = 'true'");
+    $query = mysqli_query($conn, "SELECT id, Title, ProgramName, SeasonNumber, EpisodeNumber, Genre FROM video_data WHERE ProgramName IS NOT NULL AND FileExists = 'true'");
     while ($rows = mysqli_fetch_array($query)) {
         $info = array();
-        $info['title'] = $rows['MediaTitle'];
+        $info['title'] = $rows['Title'];
         $info['show'] = $rows['ProgramName'];
         $info['season'] = $rows['SeasonNumber'];
         $info['episode'] = $rows['EpisodeNumber'];
         $info['genre'] = $rows['Genre'];
 	    $records[$rows['id']] = $info;
     }
+	return $records;
 }
 
 //  //
 function get_all_videos() {
-    
+    $records = array();
+    $query = mysqli_query($conn, "SELECT * FROM video_data WHERE FileExists = 'true'");
+	while ($rows = mysqli_fetch_array($query)) {
+        $info = array();
+        $info['title'] = $rows['Title'];
+        $info['show'] = $rows['ProgramName'];
+        $info['season'] = $rows['SeasonNumber'];
+        $info['episode'] = $rows['EpisodeNumber'];
+        $info['genre'] = $rows['Genre'];
+	    $records[$rows['id']] = $info;
+    }
+	return $records;
 }
 
-//  //
-function get_array($obj, $filter) {
-    $array = array();
-    switch($obj) {
-        case "videos":
-            $sql = "SELECT id, MediaTitle FROM video_data WHERE MediaTitle IS NOT NULL AND FileExists = 'true'";
-            $query = mysqli_query($conn, $sql);
-            while ($rows = mysqli_fetch_array($query)) {
-                $array[$rows['id']]=$rows['MediaTitle'];
-            }
-            break;
-        case "movies":
-            $sql = "SELECT id, MediaTitle FROM video_data WHERE ProgramName IS NULL AND FileExists = 'true'";
-            $query = mysqli_query($conn, $sql);
-            while ($rows = mysqli_fetch_array($query)) {
-                $array[$rows['id']]=$rows['MediaTitle'];
-            }
-            break;
-        case "series":
-            $sql = "SELECT id, MediaTitle FROM video_data WHERE ProgramName IS NOT NULL AND FileExists = 'true'";
-	        $query = mysqli_query($conn, $sql);
-	        while ($rows = mysqli_fetch_array($query)) {
-                $array[$rows['id']]=$rows['MediaTitle'];
-            }
-            break;
-        case "music":
-            $sql = "SELECT id, MediaTitle FROM audio_data WHERE MediaTitle IS NOT NULL AND FileExists = 'true'";
-	        $query = mysqli_query($conn, $sql);
-	        while($rows = mysqli_fetch_array($query)) {
-                $array[$rows['id']]=$rows['MediaTitle'];
-            }
-            break;
-    }
-    return $array;
-}
 //  //
 function filter_results($results, $table, $filter, $option) {
     $array = array();
@@ -177,10 +154,7 @@ function died($error) {
 	die();
 }
 
-//  //
-function authenticate() {
 
-}
 //  //
 function create_csv() {
 	$sql="SELECT * FROM active_requests";

@@ -1,7 +1,7 @@
 <?php
 session_start();
-//include_once('../include/auth.php');
 include_once('../include/config.php');
+include_once('../include/common.php');
 include_once('../include/mailer.php');
 
 //if ($_SESSION['type'] != 'admin') {
@@ -102,24 +102,6 @@ include_once('../include/mailer.php');
 		$success = false;
 		// Connect to SQL database //
 		$conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-		//  //
-		function died($error) {
-			echo "<div class='w3-row'>
-			<table width='65%' height='unset' align='center'>
-			<tr>
-			<td align='center'><p color='black' font-size='34px'>
-			We're sorry, but there were error(s) found with the form you submitted. These errors appear below.<br /></p>
-			<p color='black' font-size='24px'><b>", $error."</b><br /></p>
-			<p color='black' font-size='34px'>Please go back and fix these errors.<br /><br /></p>
-			</td>
-			</tr>
-			</table>
-			</div>
-			<div class='w3-row'><table width='25%' height='20%' align='center'>
-			<tr><td align='center'><button onclick='history.back()' style='width:75%; height:75%;'>Okay</button></td></tr>
-			</table></div>";        
-			die();
-		}
 
 		$usernames = array();
 		$emails = array();

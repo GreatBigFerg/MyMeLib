@@ -101,6 +101,14 @@ $name = $_SESSION["name"];
 			margin-bottom: 6px;
 			text-align:center;
 		}
+		.no-records {
+			width: 500px;
+			text-align: center;
+			font-weight: bold;			
+		}
+		.no-records::after {
+			content: "NO RECORDS FOUND!";
+		}
 	</style>
 </head>
 <body>
@@ -140,12 +148,8 @@ $name = $_SESSION["name"];
 	<div>
 		<?php 
 		if (!get_all_videos()) { ?>
-			<div class="row">
-				<div class="column" style="width:500px; text-align:center; font-weight:bold;"> NO VIDEOS FOUND!</div>
-				
-			</div>
-		<?php } 
-		else {
+			<div class="row"><div class="column no-records"></div></div>
+		<?php } else {
 		foreach(get_all_videos() as $vid) { ?>
 			<div class="row">
 				<div class="column title"> <?php echo $song['title']; ?></div>

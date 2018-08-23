@@ -19,44 +19,59 @@ function get_music_list() {
 }
 //  //
 function get_movie_list() {   
+	global $conn;
     $records = array();
     $query = mysqli_query($conn, "SELECT id, Title, Genre FROM video_data WHERE ProgramName IS NULL AND FileExists = 'true'");
-    while ($rows = mysqli_fetch_array($query)) {
-        $info = array();
-        $info['title'] = $rows['Title'];
-        $info['genre'] = $rows['Genre'];
-	    $records[$rows['id']] = $info;
-    }
+    if (!$query) {
+		return false;
+	} else {
+		while ($rows = mysqli_fetch_array($query)) {
+			$info = array();
+			$info['title'] = $rows['Title'];
+			$info['genre'] = $rows['Genre'];
+			$records[$rows['id']] = $info;
+		}
+	}
 	return $records;
 }
 //  //
 function get_series_list() {
+	global $conn;
     $records = array();
     $query = mysqli_query($conn, "SELECT id, Title, ProgramName, SeasonNumber, EpisodeNumber, Genre FROM video_data WHERE ProgramName IS NOT NULL AND FileExists = 'true'");
-    while ($rows = mysqli_fetch_array($query)) {
-        $info = array();
-        $info['title'] = $rows['Title'];
-        $info['show'] = $rows['ProgramName'];
-        $info['season'] = $rows['SeasonNumber'];
-        $info['episode'] = $rows['EpisodeNumber'];
-        $info['genre'] = $rows['Genre'];
-	    $records[$rows['id']] = $info;
-    }
+    if (!$query) {
+		return false;
+	} else {
+		while ($rows = mysqli_fetch_array($query)) {
+			$info = array();
+			$info['title'] = $rows['Title'];
+			$info['show'] = $rows['ProgramName'];
+			$info['season'] = $rows['SeasonNumber'];
+			$info['episode'] = $rows['EpisodeNumber'];
+			$info['genre'] = $rows['Genre'];
+			$records[$rows['id']] = $info;
+		}
+	}
 	return $records;
 }
 //  //
 function get_all_videos() {
+	global $conn;
     $records = array();
     $query = mysqli_query($conn, "SELECT * FROM video_data WHERE FileExists = 'true'");
-	while ($rows = mysqli_fetch_array($query)) {
-        $info = array();
-        $info['title'] = $rows['Title'];
-        $info['show'] = $rows['ProgramName'];
-        $info['season'] = $rows['SeasonNumber'];
-        $info['episode'] = $rows['EpisodeNumber'];
-        $info['genre'] = $rows['Genre'];
-	    $records[$rows['id']] = $info;
-    }
+	if (!$query) {
+		return false;
+	} else {
+		while ($rows = mysqli_fetch_array($query)) {
+			$info = array();
+			$info['title'] = $rows['Title'];
+			$info['show'] = $rows['ProgramName'];
+			$info['season'] = $rows['SeasonNumber'];
+			$info['episode'] = $rows['EpisodeNumber'];
+			$info['genre'] = $rows['Genre'];
+			$records[$rows['id']] = $info;
+		}
+	}
 	return $records;
 }
 

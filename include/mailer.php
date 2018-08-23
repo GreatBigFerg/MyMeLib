@@ -64,9 +64,9 @@ class email {
 		$formal_subject = $this->sanitize_header($this->subject);
 		$formal_body = $this->body;
 		if (!$this->sms) {
-			$formal_header = 'From: '.$this->sanitize_header($this->from_email)."\r\n".'Reply-To: '.$this->sanitize_header($this->reply_email)."\r\n"."Content-Type: text/html; charset='UTF-8'"."\r\n".'X-Mailer: PHP/'.phpversion();
+			$formal_header = "From: ".$this->sanitize_header($this->from_email)."\r\n Reply-To: ".$this->sanitize_header($this->reply_email)."\r\n Content-Type: text/html; charset='UTF-8' \r\n X-Mailer: PHP/".phpversion();
 		} else {
-			$formal_header = 'From: '.$this->sanitize_header($this->from_email)."\r\n".'Reply-To: '.$this->sanitize_header($this->reply_email)."\r\n".'X-Mailer: PHP/'.phpversion();
+			$formal_header = "From: ".$this->sanitize_header($this->from_email)."\r\n Reply-To: ".$this->sanitize_header($this->reply_email)."\r\n X-Mailer: PHP/".phpversion();
 		}
 		
 		return $this->send_email($formal_address, $formal_subject, $formal_body, $formal_header);

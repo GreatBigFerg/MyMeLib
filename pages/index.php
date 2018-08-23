@@ -2,6 +2,7 @@
 session_start();
 include_once('../include/config.php');
 include_once('../include/auth.php');
+include_once('../include/common.php');
 
 $usr = $_SESSION["usr"];
 $name = $_SESSION["name"];
@@ -21,6 +22,20 @@ if (!isset($_POST['submitok'])) {
 <body>
 <h1>Welcome to MyMeLib, <?php echo $name ?> </h1>
 <h3>You have successfully logged in!</h3>
+<div>
+	<div>
+		<?php 
+		//echo var_dump(get_music_list());
+		$songs = get_music_list();
+		foreach($songs as $sid) {
+			echo $sid['title'].'<br />';
+			echo $sid['artist'].'<br />';
+			echo $sid['album'].'<br />';
+			echo $sid['genre'].'<br />';			
+		}
+		?>
+	</div>
+</div>
 </body>
 </html>
 <?php

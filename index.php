@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('include/login.php');
+include('../include/login.php');
 
 if(isset($_SESSION["usr"])){
 	header("location: pages/index.php");

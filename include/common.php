@@ -1,21 +1,22 @@
 <?php
-include_once('include/config.php');
+include_once('../include/config.php');
 
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
-
 //  //
 function get_music_list() {
+	global $conn;
     $records = array();
-    $query = mysqli_query($conn, "SELECT id, MediaTitle, Artist, Album, Genre FROM audio_data WHERE exists = 'true'");
+    $query = mysqli_query($conn, "SELECT id, Title, Artist, Album, Genre FROM audio_data WHERE FileExists = 'true'");
     while ($rows = mysqli_fetch_array($query)) {
         $info = array();
-        $info['title'] = $rows['MediaTitle'];
+        $info['title'] = $rows['Title'];
         $info['artist'] = $rows['Artist'];
         $info['album'] = $rows['Album'];
         $info['genre'] = $rows['Genre'];
 	    $records[$rows['id']] = $info;
     }
+	return $records;
 }
 
 //  //

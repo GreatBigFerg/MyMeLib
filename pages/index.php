@@ -136,6 +136,13 @@ $name = $_SESSION["name"];
 			</div>
 		<?php } ?>
 	</div>
+    <div>
+        <form action="" method="post">
+             <input type="file" name="uploaded_file">
+            <br>
+            <input type="submit" value="Upload">
+        </form>
+    </div>
 </div>
 <!--  -->
 <div id="video-library">
@@ -164,3 +171,33 @@ $name = $_SESSION["name"];
 </html>
 <?php
 
+if(!empty($_FILES['uploaded_file']))
+  {
+    $path = "uploads/";
+    $path = $path . basename( $_FILES['uploaded_file']['name']);
+    if(move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path)) {
+      echo "The file ".  basename( $_FILES['uploaded_file']['name']). 
+      " has been uploaded";
+    } else{
+        echo "There was an error uploading the file, please try again!";
+    }
+  }
+/*
+if (isset($_POST['Upload'])) { //!empty($_FILES["file"])
+    $upload = $_FILES["file"];
+    if ($upload["error"] !== UPLOAD_ERR_OK) {
+        echo "<p>An error occurred.</p>";
+        exit;
+    }
+    echo "<h1>HELLO</h1>";
+    
+    $name = preg_replace("/[^A-Z0-9._-]/i", "_", $upload["name"]);   
+    $success = move_uploaded_file($upload["tmp_name"], $upload_dir . $name);
+    if ($success) {
+        $msg = "File uploaded successfully!";
+    } else {
+        $msg = "An error was encountered while uploading your file, please try again.";
+    }
+    echo "<h1>".$msg."</h1>";
+}
+*/

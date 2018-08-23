@@ -165,8 +165,17 @@ function died($error) {
 	die();
 }
 
+//--------------------//
+// USEFULL FUNCTIONS //
+//------------------//
 
-//  //
+$df = disk_free_space("/"); // use "C:" on Windows
+$ds = disk_total_space("/"); // use "C:" on Windows
+
+
+
+
+// Download DB info as CSV file //
 function create_csv() {
 	$sql="SELECT * FROM active_requests";
 	$result = mysqli_query($conn, $sql);

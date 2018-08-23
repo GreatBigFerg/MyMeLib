@@ -3,6 +3,38 @@ include_once('../include/config.php');
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
 //  //
+class dir {
+    public $files = [];
+    function scan() {
+        $iter = new DirectoryIterator($video_dir);
+        foreach ($iter as $fileinfo) {
+            if (!$fileinfo->isDir() || $fileinfo->isDot()) continue;
+            $FileName = $fileinfo->getFilename();
+            $FileExtension = $fileinfo->getExtension();
+            $FilePath = $fileinfo->getPathname();
+        }
+    }
+    //  //
+    function get_files($dir, $files = []) {
+        foreach (new DirectoryIterator($dir) as $fileinfo) {
+            if ($fileinfo->isDot()) {
+                continue;
+            } elseif ($fileinfo->isDir()) {
+                $files = get_files($dir.'\\'.$fileinfo->getFilename(), $files);
+            } elseif ($fileinfo->isFile()) {
+                $files[] = $fileinfo->getPathname();
+            }
+        }
+    }
+}
+
+class audio {
+    function upload_file($fp) {
+        
+    }
+}
+
+//  //
 class favorites {
 	public $current_favorites = array();
 	//  //

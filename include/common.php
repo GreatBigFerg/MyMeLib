@@ -1,6 +1,5 @@
 <?php
 include_once('../include/config.php');
-
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
 //  //
@@ -18,7 +17,6 @@ function get_music_list() {
     }
 	return $records;
 }
-
 //  //
 function get_movie_list() {   
     $records = array();
@@ -29,8 +27,8 @@ function get_movie_list() {
         $info['genre'] = $rows['Genre'];
 	    $records[$rows['id']] = $info;
     }
+	return $records;
 }
-
 //  //
 function get_series_list() {
     $records = array();
@@ -46,7 +44,6 @@ function get_series_list() {
     }
 	return $records;
 }
-
 //  //
 function get_all_videos() {
     $records = array();
@@ -93,7 +90,6 @@ function filter_results($results, $table, $filter, $option) {
     }
     return $array;
 }
-
 
 //  //
 function redirect($dst) {

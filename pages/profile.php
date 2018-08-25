@@ -7,6 +7,8 @@ include_once('../include/common.php');
 $usr = $_SESSION["usr"];
 $name = $_SESSION["name"];
 
+$profile = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM user_data WHERE UserName = '$usr'"));
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C/DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -109,6 +111,12 @@ $name = $_SESSION["name"];
 		.no-records::after {
 			content: "NO RECORDS FOUND!";
 		}
+		.section {
+			background-color: gainsboro;
+		}
+		.section div {
+			display: inline-block;
+		}
 	</style>
 </head>
 <body>
@@ -118,51 +126,53 @@ $name = $_SESSION["name"];
 	<button id="logout" onclick="location.href='../scripts/logout.php'">LOGOUT <br /> [ <i><?php echo $usr;?></i> ]</button>
 </div>
 <!--  -->
-<div id="music-library">
-	<div>
-		<div class="column column-label title">Title</div>
-		<div class="column column-label artist">Artist</div>
-		<div class="column column-label album">Album</div>
-		<div class="column column-label genre">Genre</div>
+<div id="profile-container">
+	<div class="section">
+		<div>Name</div>
+		<div>
+			<?php echo $profile['RealName'] ?>
+		</div>
 	</div>
-	<div>
-		<?php 
-		foreach(get_music_list() as $song) { ?>
-			<div class="row">
-				<div class="column title"> <?php echo $song['title']; ?></div>
-				<div class="column artist"> <?php echo $song['artist']; ?></div>
-				<div class="column album"> <?php echo $song['album']; ?></div>
-				<div class="column genre"> <?php echo $song['genre']; ?></div>
-			</div>
-		<?php } ?>
+	<div class="section">
+		<div>Icon</div>
+		<div>
+			<?php echo $profile['id'] ?>
+		</div>
 	</div>
-    <div>
-        <a href="../pages/upload.php">Upload Song</a>
-    </div>
+	<div class="section">
+		<div>UserName</div>
+		<div>
+			<?php echo $profile['UserName'] ?>
+		</div>
+	</div>
+	<div class="section">
+		<div>Email</div>
+		<div>
+			<?php echo $profile['UserEmail'] ?>
+		</div>
+	</div>
+	<div class="section">
+		<div>Password</div>
+		<div>
+			<?php echo $profile['id'] ?>
+		</div>
+	</div>
+	<div class="section">
+		<div>Family</div>
+		<div>
+			<?php echo $profile['id'] ?>
+		</div>
+	</div>
+	<div class="section">
+		<div></div>
+		<div></div>
+	</div>
+	<div class="section">
+		<div></div>
+		<div></div>
+	</div>
 </div>
-<!--  -->
-<div id="video-library">
-	<div>
-		<div class="column column-label title">Title</div>
-		<div class="column column-label artist">Artist</div>
-		<div class="column column-label album">Album</div>
-		<div class="column column-label genre">Genre</div>
-	</div>
-	<div>
-		<?php 
-		if (!get_all_videos()) { ?>
-			<div class="row"><div class="column no-records"></div></div>
-		<?php } else {
-		foreach(get_all_videos() as $vid) { ?>
-			<div class="row">
-				<div class="column title"> <?php echo $song['title']; ?></div>
-				<div class="column artist"> <?php echo $song['artist']; ?></div>
-				<div class="column album"> <?php echo $song['album']; ?></div>
-				<div class="column genre"> <?php echo $song['genre']; ?></div>
-			</div>
-		<?php } } ?>
-	</div>
-</div>
+
 </body>
 </html>
 <?php

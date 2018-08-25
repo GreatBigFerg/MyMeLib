@@ -187,11 +187,8 @@ if (!empty($_FILES['uploaded_file'])) {
 
    
     if ($upload["error"] !== UPLOAD_ERR_OK) {
-        echo "<p>An error occurred.</p>";
-        exit;
+        $msg = "error uploading your file.";
     }    
-    
-    
     if ($success) {
         $msg = "File uploaded successfully!";
     } else {

@@ -21,7 +21,7 @@ $videoPlayerPathname = 'C:\Program Files (x86)\MPC-HC\mpc-hc-gpu.exe';
 // Optional switches for opening files //
 $videoPlayerSwitches = '/play /fullscreen';
 
-$upload_dir = "tmp/";
+$upload_dir = "../uploads/";
 
 $video_dir = "C:/FergShare/Public_Content/Video";
 $video_ext = ['avi','mkv','mp4','mov','wmv'];
@@ -42,47 +42,12 @@ if (!$conn) {
 }
 
 // Get configuration info from database //
-/*
-$config = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM configurationdata"));
+$config = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM config_data"));
 if ($config['AdminEmail'] != "") {
 	$admin_email = $config['AdminEmail'];
 } else {
     $admin_email = "bryceferguson.css@gmail.com";
 }
-*/
-
-/*
- //  //
-$a_genres = array();
-$query = mysqli_query($conn, "SELECT genre FROM audiodata WHERE exists = 'true'");
-while ($rows = mysqli_fetch_array($query)) {
-	$a_genres[$rows['genre']];
-}	
-//  //
-$v_genres = array();
-$query = mysqli_query($conn, "SELECT genre FROM videodata WHERE exists = 'true'");
-while ($rows = mysqli_fetch_array($query)) {
-	$v_genres[$rows['genre']];
-}
-
-
-
-//  //
-$a_artists = array();
-$query = mysqli_query($conn, "SELECT artist FROM audiodata WHERE artist IS NOT NULL AND exists = 'true'");
-while ($rows = mysqli_fetch_array($query)) {
-	$a_artists[$rows['artist']];
-}
-*/
-
-	
-
-
-
-
-
-
-
 
 
 mysqli_close($conn);

@@ -1,4 +1,5 @@
 <?php
+include_once('config.php');
 $error='';
 if (isset($_POST['submit'])) {
 	if (empty($_POST['username']) || empty($_POST['password'])) {
@@ -11,10 +12,6 @@ if (isset($_POST['submit'])) {
 		$username = $username;
 		$password = $password;
 		// Connect to SQL database //
-		define('DB_SERVER', 'localhost');
-		define('DB_USER', 'mymelib-tmp');
-		define('DB_PASS', 'mml@TMS69');
-		define('DB_NAME', 'mymelib_dev');
 		$conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 		// SQL query to fetch information of registerd users and finds user match.
 		$query = mysqli_query($conn, "select * from user_data where UserName='$username' AND UserActive = 'true'");

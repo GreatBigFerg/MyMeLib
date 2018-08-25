@@ -9,8 +9,8 @@ if (!$_SESSION["usr"] == "") {
 }
 
 $time = $_SERVER['REQUEST_TIME'];
-// for a 30 minute timeout, specified in seconds (1880=30min,3600=1hr)
-$timeout_duration = 43200;
+// Login timeout duration, specified in seconds (1880=30min,3600=1hr,21600=6hr,43200=12hr)
+$timeout_duration = 21600;
 if (isset($_SESSION['LAST_ACTIVITY']) && 
    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();

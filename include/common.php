@@ -55,7 +55,7 @@ function get_series_list() {
 	return $records;
 }
 //  //
-function get_all_videos() {
+function get_videos_list() {
 	global $conn;
     $records = array();
     $query = mysqli_query($conn, "SELECT * FROM video_data WHERE FileExists = 'true'");
@@ -74,6 +74,25 @@ function get_all_videos() {
 	}
 	return $records;
 }
+ //  //
+function get_genres_list($type) {
+	global $conn;
+    $records = array();
+	switch($type) {
+		case "video":
+			$query = mysqli_query($conn, "SELECT Genre FROM video_data WHERE FileExists = 'true'");
+			break;
+		case "audio":
+			$query = mysqli_query($conn, "SELECT Genre FROM audio_data WHERE FileExists = 'true'");
+			break;
+	}
+	while ($rows = mysqli_fetch_array($query)) {
+		$records[$rows['Genre']];
+	}
+	return $records;
+}
+
+
 
 //  //
 function filter_results($results, $table, $filter, $option) {
@@ -106,30 +125,6 @@ function filter_results($results, $table, $filter, $option) {
     return $array;
 }
 
-//  //
-function redirect($dst) {
-	switch($dst) {
-		case "home":
-			$url="http://clagettresidential.com/";
-			echo "<script>window.location='".$url."';</script>";
-			break;
-		case "login":
-			$url="http://clagettresidential.com/MRP/login.php";
-			echo "<script>window.location='".$url."';</script>";
-			break;
-		case "portal":
-			$url="http://clagettresidential.com/MRP/default.html";
-			echo "<script>window.location='".$url."';</script>";
-			break;
-		case "back":
-			echo "<script>window.history.go(-2);</script>";
-			break;
-		case "reload":
-			echo "<meta http-equiv='refresh' content='0'>";
-			echo "<script>window.history.go(-1);</script>";
-			break;
-	}
-}
 
 //  //
 function error_function($level, $message, $file, $line, $context) {
@@ -137,9 +132,7 @@ function error_function($level, $message, $file, $line, $context) {
 		error_message("Sorry, I encountered an error while completing your request", $message);
 	}
 }
-
-// Set custom error handler for all errors //
-//set_error_handler("error_function");
+//set_error_handler("error_function"); // Set custom error handler for all errors //
 
 // Called if there is an error that needs to be brought to the users attention, such as invalid input //
 function error_message($type, $msg) {
@@ -164,6 +157,7 @@ function died($error) {
 	</table></div>";        
 	die();
 }
+
 
 //--------------------//
 // USEFULL FUNCTIONS //

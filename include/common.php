@@ -75,7 +75,7 @@ function get_videos_list() {
 	return $records;
 }
  //  //
-function get_genres_list($type) {
+function get_genre_list($type) {
 	global $conn;
     $records = array();
 	switch($type) {

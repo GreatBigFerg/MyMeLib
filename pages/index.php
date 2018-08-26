@@ -7,6 +7,8 @@ include_once('../include/common.php');
 $usr = $_SESSION["usr"];
 $name = $_SESSION["name"];
 
+$audio = new audio();
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C/DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -109,14 +111,40 @@ $name = $_SESSION["name"];
 		.no-records::after {
 			content: "NO RECORDS FOUND!";
 		}
+
+        form {
+			display: grid;
+			grid-template-columns: 50px 1fr;
+			grid-gap: 6px;
+		}
+		.form-row {
+			display: grid;
+			margin: 8px 12px;
+			grid-column: 1 / 2;
+		}
+		
+		label {
+			grid-column: 1 / 2;
+			grid-row: 1 / 2;
+			width: 50px;
+		}
+ 
+		input, button {
+			grid-column: 2 / 3;
+			
+		}
+        .upload-form-container {
+            border-radius: 25px;
+			box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.75);
+			margin-bottom: 45px;
+			margin-top: 25px;
+            background-color: darkgray;
+        }
 	</style>
 </head>
 <body>
-<!--  -->
-<div id="header">
-	<h2>Welcome to MyMeLib, <i style="text-decoration:underline; font-size:28px;"><?php echo $name;?></i></h2>
-	<button id="logout" onclick="location.href='../scripts/logout.php'">LOGOUT <br /> [ <i><?php echo $usr;?></i> ]</button>
-</div>
+<!-- Header & Navigation Menu -->
+<?php include("header.php"); ?>
 <!--  -->
 <div id="music-library">
 	<div>
@@ -127,7 +155,7 @@ $name = $_SESSION["name"];
 	</div>
 	<div>
 		<?php 
-		foreach(get_music_list() as $song) { ?>
+		foreach($audio->get_music_list() as $song) { ?>
 			<div class="row">
 				<div class="column title"> <?php echo $song['title']; ?></div>
 				<div class="column artist"> <?php echo $song['artist']; ?></div>
@@ -136,10 +164,12 @@ $name = $_SESSION["name"];
 			</div>
 		<?php } ?>
 	</div>
-    <div>
-        <a href="../pages/upload.php">Upload Song</a>
+    <!--  -->
+    <div class="upload-form-container">
+        <?php include("../pages/upload.php"); ?>
     </div>
 </div>
+
 <!--  -->
 <div id="video-library">
 	<div>
@@ -150,10 +180,10 @@ $name = $_SESSION["name"];
 	</div>
 	<div>
 		<?php 
-		if (!get_all_videos()) { ?>
+		if (!get_video_list()) { ?>
 			<div class="row"><div class="column no-records"></div></div>
 		<?php } else {
-		foreach(get_all_videos() as $vid) { ?>
+		foreach(get_video_list() as $vid) { ?>
 			<div class="row">
 				<div class="column title"> <?php echo $song['title']; ?></div>
 				<div class="column artist"> <?php echo $song['artist']; ?></div>

@@ -3,95 +3,191 @@ include_once('../include/config.php');
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
 //  //
-function get_music_list() {
-	global $conn;
-    $records = array();
-    $query = mysqli_query($conn, "SELECT id, Title, Artist, Album, Genre FROM audio_data WHERE FileExists = 'true'");
-    while ($rows = mysqli_fetch_array($query)) {
-        $info = array();
-        $info['title'] = $rows['Title'];
-        $info['artist'] = $rows['Artist'];
-        $info['album'] = $rows['Album'];
-        $info['genre'] = $rows['Genre'];
-	    $records[$rows['id']] = $info;
+class video {
+    //  //
+    function get_movie_list() {   
+	    global $conn;
+        $records = array();
+        $query = mysqli_query($conn, "SELECT id, Title, Genre FROM video_data WHERE ProgramName IS NULL AND FileExists = 'true'");
+        if (!$query) {
+		    return false;
+	    } else {
+		    while ($rows = mysqli_fetch_array($query)) {
+			    $info = array();
+			    $info['title'] = $rows['Title'];
+			    $info['genre'] = $rows['Genre'];
+			    $records[$rows['id']] = $info;
+		    }
+	    }
+	    return $records;
     }
-	return $records;
-}
-//  //
-function get_movie_list() {   
-	global $conn;
-    $records = array();
-    $query = mysqli_query($conn, "SELECT id, Title, Genre FROM video_data WHERE ProgramName IS NULL AND FileExists = 'true'");
-    if (!$query) {
-		return false;
-	} else {
-		while ($rows = mysqli_fetch_array($query)) {
-			$info = array();
-			$info['title'] = $rows['Title'];
-			$info['genre'] = $rows['Genre'];
-			$records[$rows['id']] = $info;
-		}
-	}
-	return $records;
-}
-//  //
-function get_series_list() {
-	global $conn;
-    $records = array();
-    $query = mysqli_query($conn, "SELECT id, Title, ProgramName, SeasonNumber, EpisodeNumber, Genre FROM video_data WHERE ProgramName IS NOT NULL AND FileExists = 'true'");
-    if (!$query) {
-		return false;
-	} else {
-		while ($rows = mysqli_fetch_array($query)) {
-			$info = array();
-			$info['title'] = $rows['Title'];
-			$info['show'] = $rows['ProgramName'];
-			$info['season'] = $rows['SeasonNumber'];
-			$info['episode'] = $rows['EpisodeNumber'];
-			$info['genre'] = $rows['Genre'];
-			$records[$rows['id']] = $info;
-		}
-	}
-	return $records;
-}
-//  //
-function get_videos_list() {
-	global $conn;
-    $records = array();
-    $query = mysqli_query($conn, "SELECT * FROM video_data WHERE FileExists = 'true'");
-	if (!$query) {
-		return false;
-	} else {
-		while ($rows = mysqli_fetch_array($query)) {
-			$info = array();
-			$info['title'] = $rows['Title'];
-			$info['show'] = $rows['ProgramName'];
-			$info['season'] = $rows['SeasonNumber'];
-			$info['episode'] = $rows['EpisodeNumber'];
-			$info['genre'] = $rows['Genre'];
-			$records[$rows['id']] = $info;
-		}
-	}
-	return $records;
-}
- //  //
-function get_genre_list($type) {
-	global $conn;
-    $records = array();
-	switch($type) {
-		case "video":
-			$query = mysqli_query($conn, "SELECT Genre FROM video_data WHERE FileExists = 'true'");
-			break;
-		case "audio":
-			$query = mysqli_query($conn, "SELECT Genre FROM audio_data WHERE FileExists = 'true'");
-			break;
-	}
-	while ($rows = mysqli_fetch_array($query)) {
-		$records[$rows['Genre']];
-	}
-	return $records;
+    //  //
+    function get_series_list() {
+	    global $conn;
+        $records = array();
+        $query = mysqli_query($conn, "SELECT id, Title, ProgramName, SeasonNumber, EpisodeNumber, Genre FROM video_data WHERE ProgramName IS NOT NULL AND FileExists = 'true'");
+        if (!$query) {
+		    return false;
+	    } else {
+		    while ($rows = mysqli_fetch_array($query)) {
+			    $info = array();
+			    $info['title'] = $rows['Title'];
+			    $info['show'] = $rows['ProgramName'];
+			    $info['season'] = $rows['SeasonNumber'];
+			    $info['episode'] = $rows['EpisodeNumber'];
+			    $info['genre'] = $rows['Genre'];
+			    $records[$rows['id']] = $info;
+		    }
+	    }
+	    return $records;
+    }
+    //  //
+    function get_video_list() {
+	    global $conn;
+        $records = array();
+        $query = mysqli_query($conn, "SELECT * FROM video_data WHERE FileExists = 'true'");
+	    if (!$query) {
+		    return false;
+	    } else {
+		    while ($rows = mysqli_fetch_array($query)) {
+			    $info = array();
+			    $info['title'] = $rows['Title'];
+			    $info['show'] = $rows['ProgramName'];
+			    $info['season'] = $rows['SeasonNumber'];
+			    $info['episode'] = $rows['EpisodeNumber'];
+			    $info['genre'] = $rows['Genre'];
+			    $records[$rows['id']] = $info;
+		    }
+	    }
+	    return $records;
+    }
+    //  //
+    function get_genre_list() {
+	    global $conn;
+        $records = array();
+		$query = mysqli_query($conn, "SELECT Genre FROM video_data WHERE FileExists = 'true'");			    
+	    while ($rows = mysqli_fetch_array($query)) {
+		    $records[$rows['Genre']];
+	    }
+	    return $records;
+    }
 }
 
+//  //
+class audio {
+    //  //
+    function get_music_list() {
+	    global $conn;
+        $records = array();
+        $query = mysqli_query($conn, "SELECT id, Title, Artist, Album, Genre FROM audio_data WHERE FileExists = 'true'");
+        while ($rows = mysqli_fetch_array($query)) {
+            $info = array();
+            $info['title'] = $rows['Title'];
+            $info['artist'] = $rows['Artist'];
+            $info['album'] = $rows['Album'];
+            $info['genre'] = $rows['Genre'];
+	        $records[$rows['id']] = $info;
+        }
+	    return $records;
+    }
+    //  //
+    function get_genre_list() {
+	    global $conn;
+        $records = array();
+		$query = mysqli_query($conn, "SELECT Genre FROM audio_data WHERE FileExists = 'true'");			    
+	    while ($rows = mysqli_fetch_array($query)) {
+		    $records[$rows['Genre']];
+	    }
+	    return $records;
+    }
+    //  //
+    function filter_results($filter, $option) {
+        global $conn;
+        $records = array();
+        switch($filter) {
+            case "genre":
+                $query_filter = "Genre = '".$option."'";
+                break;        
+            case "artist":
+                $query_filter = "Artist = '".$option."'";
+                break;
+            case "album":
+                $query_filter = "Album = '".$option."'";
+                break;
+            case "owner":
+                $query_filter = "Owner = '".$option."'";
+                break;
+            case "favorite":
+                $query_filter = "Favorite = '".$option."'";
+                break;
+        }
+        $sql = "SELECT id, Title FROM audio_data WHERE ".$query_filter;
+        $query = mysqli_query($conn, $sql);
+        while($rows = mysqli_fetch_array($query)) {
+            $records[$rows['id']]=$rows['Title'];
+        }
+        return $records;
+    }
+    //  //
+    function upload_file() {
+        $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);	
+	    $artist = filter_var($_POST['artist'], FILTER_SANITIZE_STRING);
+	    $album = filter_var($_POST['album'], FILTER_SANITIZE_STRING);
+	    $genre = filter_var($_POST['genre'], FILTER_SANITIZE_STRING);
+
+	    $upload = $_FILES["uploaded_file"];
+	    $name = preg_replace("/[^A-Z0-9._-]/i", "_", $upload["name"]);	
+	    $fp = $upload_dir . $name;
+	    $success = move_uploaded_file($upload["tmp_name"], $fp);
+
+	    $fileinfo = pathinfo($fp);
+	    $filedir = $fileinfo['dirname'];
+	    $extension = $fileinfo['extension'];
+
+	    $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+	    $sql = "INSERT INTO audio_data (Title, Artist, Album, Genre, FileName, FilePath, FileFormat, FileExists) VALUES ('$title', '$artist', '$album', '$genre', '$name', '$filedir', '$extension', 'true')";
+	    $query = mysqli_query($conn, $sql);
+	    if (!$query) {
+		    echo mysqli_error($conn);
+	    }
+	    mysqli_close($conn);
+ 
+        if ($upload["error"] !== UPLOAD_ERR_OK) {
+            $msg = "error uploading your file.";
+        }    
+        if ($success) {
+            $msg = "File uploaded successfully!";
+        } else {
+            $msg = "An error was encountered while uploading your file, please try again.";
+        }
+	    echo "<meta http-equiv='refresh' content='0'>";
+	    echo "<script> alert('".$msg."');</script>";
+    }
+    // Get existing playlist from DB //
+	function playlist_existing() {
+		$temp = true;
+	}
+	//  //
+	function playlist_create($str) {
+		$temp = true;
+	}
+	//  //
+	function playlist_delete($str) {
+		$temp = true;
+	}
+	//  //
+	function playlist_rename($str) {
+		$temp = true;
+	}
+	//  //
+	function playlist_add_track($t_id, $p_id) {
+		$temp = true;
+	}
+	//  //
+	function playlist_remove_track($t_id, $p_id) {
+		$temp = true;
+	}
+}
 
 
 //  //
@@ -100,23 +196,23 @@ function filter_results($results, $table, $filter, $option) {
     $query_filter = "";
     switch($filter) {
         case "genre":
-            $query_filter = "Genre = '".$option."'"; // $option == specific-genre
+            $query_filter = "Genre = '".$option."'";
             break;        
         case "artist":
-            $query_filter = "Artist = '".$option."'"; // $option == artist-name
+            $query_filter = "Artist = '".$option."'";
             break;
         case "album":
-            $query_filter = "Album = '".$option."'"; // $option == album-title
+            $query_filter = "Album = '".$option."'";
             break;
         case "owner":
-            $query_filter = "Owner = '".$option."'"; // $option == user-id
+            $query_filter = "Owner = '".$option."'";
             break;
         case "favorite":
-            $query_filter = "Favorite = '".$option."'"; // $option == user-id
+            $query_filter = "Favorite = '".$option."'";
             break;
     }
     foreach ($results as $rid => $title) {
-        $sql = "SELECT id, MediaTitle FROM ".$table." WHERE ".$query_filter;
+        $sql = "SELECT id, Title FROM ".$table." WHERE ".$query_filter;
         $query = mysqli_query($conn, $sql);
         while($rows = mysqli_fetch_array($query)) {
             $array[$rows['id']]=$rows['MediaTitle'];

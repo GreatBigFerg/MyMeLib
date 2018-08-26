@@ -28,12 +28,6 @@ class dir {
     }
 }
 
-class audio {
-    function upload_file($fp) {
-        
-    }
-}
-
 //  //
 class favorites {
 	public $current_favorites = array();

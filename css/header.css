@@ -50,6 +50,7 @@ body {font-family:'Ubuntu';}
         .mul9circ1 {
             background-color: #FF00FF;
             -webkit-transform: translate(0, 6px);
+            -ms-transform:  translate(0, 6px);
             transform: translate(0, 6px);
             -webkit-animation: mul9circ1Anim 3s infinite ease-in-out;
             animation: mul9circ1Anim 3s infinite ease-in-out;
@@ -57,6 +58,7 @@ body {font-family:'Ubuntu';}
         .mul9circ2 {
             background-color: #FFFF00;
             -webkit-transform: translate(-12px, -12px);
+            -ms-transform: translate(-12px, -12px);
             transform: translate(-12px, -12px);
             -webkit-animation: mul9circ2Anim 3s infinite ease-in-out;
             animation: mul9circ2Anim 3s infinite ease-in-out;
@@ -64,6 +66,7 @@ body {font-family:'Ubuntu';}
         .mul9circ3 {
             background-color: #00FFFF;
             -webkit-transform: translate(12px, -12px);
+            -ms-transform: translate(12px, -12px);
             transform: translate(12px, -12px);
             -webkit-animation: mul9circ3Anim 3s infinite ease-in-out;
             animation: mul9circ3Anim 3s infinite ease-in-out;
@@ -95,8 +98,8 @@ body {font-family:'Ubuntu';}
 
         .menu-container {
             position: static;
-            top: 0px;
-            left: 0px;
+            top: 0;
+            left: 0;
             min-height: 50px;
             height: auto;
             width: 100%;
@@ -110,8 +113,8 @@ body {font-family:'Ubuntu';}
         .menu-button {
             color:black;
             position:relative;
-            top:0px;
-            left:0px;
+            top:0;
+            left:0;
             cursor:pointer;
         }
         .menu-button-label {
@@ -138,7 +141,7 @@ body {font-family:'Ubuntu';}
             background-color: rgba(255, 255, 255, 0.25);
             padding: 8px 15px 4px 8px;
             font-size: 18px;
-            box-shadow: -3px 3px 2px 0px rgba(0, 0, 0, 0.45);
+            box-shadow: -3px 3px 2px 0 rgba(0, 0, 0, 0.45);
             line-height: 125%;
         }
         .menu-button:hover {
@@ -146,7 +149,7 @@ body {font-family:'Ubuntu';}
         }
         .menu-dropdown-item:hover {
             background-color: #ddd;
-            box-shadow: 0px 2px 1px 2px rgba(0, 0, 0, 0.65);
+            box-shadow: 0 2px 1px 2px rgba(0, 0, 0, 0.65);
             animation-timing-function: linear;
             transform-origin: bottom center;
             animation-name: pulse;

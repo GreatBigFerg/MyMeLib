@@ -7,8 +7,8 @@ body {font-family:'Ubuntu';}
         .duo1 {left:0;}
         .duo2 {left:20px}
         .dot {width:9px; height:18px; border-radius:13px; background:#333; position:absolute;}
-        .dot-a {left:0px;}
-        .dot-b {right:0px;}
+        .dot-a {left:0;}
+        .dot-b {right:0;}
         @keyframes spin {0%{transform:rotate(0deg)} 50%{transform:rotate(180deg)} 100%{transform:rotate(180deg)}}
         @keyframes onOff {0%{opacity:0;} 49%{opacity:0;}50% {opacity:1;} 100%{opacity:1;}}
         .duo1 {animation-name:spin;}

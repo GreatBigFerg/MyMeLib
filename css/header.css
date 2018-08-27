@@ -103,7 +103,7 @@ body {font-family:'Ubuntu';}
             min-height: 50px;
             height: auto;
             width: 100%;
-            background-color: #ccc;
+            background-color: transparent;
             display: flex;
             align-items: center;
             justify-content: space-around;

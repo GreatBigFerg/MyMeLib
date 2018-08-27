@@ -8,6 +8,7 @@ $usr = $_SESSION["usr"];
 $name = $_SESSION["name"];
 
 $audio = new audio();
+$video = new video();
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C/DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -145,7 +146,7 @@ $audio = new audio();
 <body>
 <!-- Header & Navigation Menu -->
 <?php include("header.php"); ?>
-<!--  -->
+<!-- MUSIC -->
 <div id="music-library">
 	<div>
 		<div class="column column-label title">Title</div>
@@ -155,22 +156,25 @@ $audio = new audio();
 	</div>
 	<div>
 		<?php 
-		foreach($audio->get_music_list() as $song) { ?>
+        $songs = $audio->get_music_list();
+		if (!$songs) { ?>
+			<div class="row"><div class="column no-records"></div></div>
+		<?php } else {
+		foreach($songs as $song) { ?>
 			<div class="row">
 				<div class="column title"> <?php echo $song['title']; ?></div>
 				<div class="column artist"> <?php echo $song['artist']; ?></div>
 				<div class="column album"> <?php echo $song['album']; ?></div>
 				<div class="column genre"> <?php echo $song['genre']; ?></div>
 			</div>
-		<?php } ?>
+		<?php } } ?>
 	</div>
-    <!--  -->
+    <!-- UPLOAD MUSIC -->
     <div class="upload-form-container">
         <?php include("../pages/upload.php"); ?>
     </div>
 </div>
-
-<!--  -->
+<!-- VIDEO -->
 <div id="video-library">
 	<div>
 		<div class="column column-label title">Title</div>
@@ -180,10 +184,11 @@ $audio = new audio();
 	</div>
 	<div>
 		<?php 
-		if (!get_video_list()) { ?>
+        $videos = $video->get_video_list();
+		if (!$videos) { ?>
 			<div class="row"><div class="column no-records"></div></div>
 		<?php } else {
-		foreach(get_video_list() as $vid) { ?>
+		foreach($videos as $vid) { ?>
 			<div class="row">
 				<div class="column title"> <?php echo $song['title']; ?></div>
 				<div class="column artist"> <?php echo $song['artist']; ?></div>

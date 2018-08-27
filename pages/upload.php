@@ -35,7 +35,7 @@ echo "
 
 if (!empty($_FILES['uploaded_file'])) {
     $audio = new audio();
-    $audio->upload_file();
+    $audio->upload();
 	
 }
 

@@ -3,6 +3,28 @@ include_once('../include/config.php');
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
 //  //
+class file_upload {
+    public $file;
+    public $filename;
+    public $filepath;
+    public $dir;
+    public $ext;
+    //  //
+    function file_info() {
+        $finfo = pathinfo($this->filepath);
+	    $this->dir = $finfo['dirname'];
+	    $this->ext = $finfo['extension'];
+    }
+    //  //
+    function move_upload() {
+        $this->filename = preg_replace("/[^A-Z0-9._-]/i", "_", $this->file["name"]);
+        $this->filepath = $upload_dir . $this->filename;
+        $success = move_uploaded_file($this->file["tmp_name"], $this->filepath);
+        return $success;
+    }
+}
+
+//  //
 class video {
     //  //
     function get_movie_list() {   
@@ -129,33 +151,25 @@ class audio {
         return $records;
     }
     //  //
-    function upload_file() {
+    function upload() {
         $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);	
 	    $artist = filter_var($_POST['artist'], FILTER_SANITIZE_STRING);
 	    $album = filter_var($_POST['album'], FILTER_SANITIZE_STRING);
 	    $genre = filter_var($_POST['genre'], FILTER_SANITIZE_STRING);
-
 	    $upload = $_FILES["uploaded_file"];
-	    $name = preg_replace("/[^A-Z0-9._-]/i", "_", $upload["name"]);	
-	    $fp = $upload_dir . $name;
-	    $success = move_uploaded_file($upload["tmp_name"], $fp);
-
-	    $fileinfo = pathinfo($fp);
-	    $filedir = $fileinfo['dirname'];
-	    $extension = $fileinfo['extension'];
-
-	    $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-	    $sql = "INSERT INTO audio_data (Title, Artist, Album, Genre, FileName, FilePath, FileFormat, FileExists) VALUES ('$title', '$artist', '$album', '$genre', '$name', '$filedir', '$extension', 'true')";
-	    $query = mysqli_query($conn, $sql);
-	    if (!$query) {
-		    echo mysqli_error($conn);
-	    }
-	    mysqli_close($conn);
- 
-        if ($upload["error"] !== UPLOAD_ERR_OK) {
-            $msg = "error uploading your file.";
-        }    
-        if ($success) {
+        $fu = new file_upload();
+        $fu->file = $upload;
+        if ($fu->move_upload()) {
+            $fu->file_info();
+            $fname = $fu->filename;
+            $fdir = $fu->dir;
+            $fext = $fu->ext;
+	        $sql = "INSERT INTO audio_data (Title, Artist, Album, Genre, FileName, FilePath, FileFormat, FileExists) 
+                VALUES ('$title', '$artist', '$album', '$genre', '$fname', '$fdir', '$fext', 'true')";
+	        $query = mysqli_query($conn, $sql);
+	        if (!$query) {
+		        echo mysqli_error($conn);
+	        }
             $msg = "File uploaded successfully!";
         } else {
             $msg = "An error was encountered while uploading your file, please try again.";
@@ -189,7 +203,6 @@ class audio {
 	}
 }
 
-
 //  //
 function filter_results($results, $table, $filter, $option) {
     $array = array();
@@ -221,7 +234,6 @@ function filter_results($results, $table, $filter, $option) {
     return $array;
 }
 
-
 //  //
 function error_function($level, $message, $file, $line, $context) {
 	if ($level == 256 || $level == 4096) {
@@ -234,7 +246,6 @@ function error_function($level, $message, $file, $line, $context) {
 function error_message($type, $msg) {
 	echo "<script> alert('".$type.": \\n".$msg."');</script>";
 }
-
 // Return a message to inform user of an error with their submission //
 function died($error) {
 	echo "<div class='w3-row'>
@@ -254,7 +265,6 @@ function died($error) {
 	die();
 }
 
-
 //--------------------//
 // USEFULL FUNCTIONS //
 //------------------//
@@ -262,7 +272,7 @@ function died($error) {
 $df = disk_free_space("/"); // use "C:" on Windows
 $ds = disk_total_space("/"); // use "C:" on Windows
 
-
+$exist = file_exists($filepath);
 
 
 // Download DB info as CSV file //

@@ -2,20 +2,20 @@
 include_once('../include/config.php');
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
-//  //
+// Handles the file uploading/moving of temporary file & gets file info to store in DB //
 class file_upload {
     public $file;
     public $filename;
     public $filepath;
     public $dir;
     public $ext;
-    //  //
+    // Retrieve file details (Return the file's absolute path & file-extension) //
     function file_info() {
         $finfo = pathinfo($this->filepath);
 	    $this->dir = $finfo['dirname'];
 	    $this->ext = $finfo['extension'];
     }
-    //  //
+    // Moves the file from temporary upload location to specified directory (Return boolean for pass/failed to move file to new location) //
     function move_upload() {
         $this->filename = preg_replace("/[^A-Z0-9._-]/i", "_", $this->file["name"]);
         $this->filepath = $upload_dir . $this->filename;
@@ -24,9 +24,9 @@ class file_upload {
     }
 }
 
-//  //
+// Handles video-specific operations //
 class video {
-    //  //
+    // Return multi-dementianal array of only movies in the DB  //
     function get_movie_list() {   
 	    global $conn;
         $records = array();
@@ -43,7 +43,7 @@ class video {
 	    }
 	    return $records;
     }
-    //  //
+    // Return multi-dementianal array of only TV-shows/series in the DB //
     function get_series_list() {
 	    global $conn;
         $records = array();
@@ -63,7 +63,7 @@ class video {
 	    }
 	    return $records;
     }
-    //  //
+    // Return multi-dementianal array of all videos in the DB //
     function get_video_list() {
 	    global $conn;
         $records = array();
@@ -83,7 +83,7 @@ class video {
 	    }
 	    return $records;
     }
-    //  //
+    // Return array of existing genres for videos in the DB //
     function get_genre_list() {
 	    global $conn;
         $records = array();
@@ -95,9 +95,9 @@ class video {
     }
 }
 
-//  //
+// Handles audio-specific operations //
 class audio {
-    //  //
+    // Return multi-dementianal array of all songs in the DB //
     function get_music_list() {
 	    global $conn;
         $records = array();
@@ -112,7 +112,7 @@ class audio {
         }
 	    return $records;
     }
-    //  //
+    // Return array of existing genres for songs in the DB //
     function get_genre_list() {
 	    global $conn;
         $records = array();
@@ -122,7 +122,7 @@ class audio {
 	    }
 	    return $records;
     }
-    //  //
+    // Return multi-dementianal array of songs limited by a given filter/option //
     function filter_results($filter, $option) {
         global $conn;
         $records = array();
@@ -150,7 +150,7 @@ class audio {
         }
         return $records;
     }
-    //  //
+    // Get input from user and handle new file upload, creating new record in the DB //
     function upload() {
         $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);	
 	    $artist = filter_var($_POST['artist'], FILTER_SANITIZE_STRING);
@@ -181,29 +181,29 @@ class audio {
 	function playlist_existing() {
 		$temp = true;
 	}
-	//  //
+	// Create new playlist of songs //
 	function playlist_create($str) {
 		$temp = true;
 	}
-	//  //
+	// Remove an existing playlist from records //
 	function playlist_delete($str) {
 		$temp = true;
 	}
-	//  //
+	// Rename an existing playlist //
 	function playlist_rename($str) {
 		$temp = true;
 	}
-	//  //
+	// Add a new song to a given playlist //
 	function playlist_add_track($t_id, $p_id) {
 		$temp = true;
 	}
-	//  //
+	// Remove a song from a given playlist //
 	function playlist_remove_track($t_id, $p_id) {
 		$temp = true;
 	}
 }
 
-//  //
+// Temporary function for filtering results shown //
 function filter_results($results, $table, $filter, $option) {
     $array = array();
     $query_filter = "";

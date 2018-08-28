@@ -11,12 +11,14 @@ if (!$_SESSION["usr"] == "") {
 $time = $_SERVER['REQUEST_TIME'];
 // Login timeout duration, specified in seconds (1880=30min,3600=1hr,21600=6hr,43200=12hr)
 $timeout_duration = 21600;
+// Destroy the session & logout user if timeout duration has been exceeded //
 if (isset($_SESSION['LAST_ACTIVITY']) && 
    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
+// Set a last-active timestamp to calculate login timeout based off of instead of the login timestamp //
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 if (!isset($uid)) { 

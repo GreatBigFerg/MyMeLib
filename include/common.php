@@ -269,10 +269,10 @@ function died($error) {
 // USEFULL FUNCTIONS //
 //------------------//
 
-$df = disk_free_space("/"); // use "C:" on Windows
-$ds = disk_total_space("/"); // use "C:" on Windows
+//  $df = disk_free_space("/"); // use "C:" on Windows
+//  $ds = disk_total_space("/"); // use "C:" on Windows
 
-$exist = file_exists($filepath);
+//  $exist = file_exists($filepath);
 
 
 // Download DB info as CSV file //

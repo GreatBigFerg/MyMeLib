@@ -66,9 +66,8 @@ $upload_filetype = "audio";
 		.row:nth-child(even) {
 			background: rgba(0, 0, 0, 0.025);
 		}
-		.row-label {
-			border-bottom: 0.5px solid black;
-			margin-bottom: 2px;
+		.row-label {	
+			margin-bottom: 5px;
 		}
 		.column {
 			display: inline-block;
@@ -149,7 +148,7 @@ $upload_filetype = "audio";
 <body>
 	<!-- Header & Navigation Menu -->
 	<?php include("header.php"); ?>
-	<!-- MUSIC -->
+	<!-- BROWSE MUSIC -->
 	<?php include("browse.php"); ?>
 	<!-- UPLOAD MUSIC -->
 	<div class="upload-form-container">

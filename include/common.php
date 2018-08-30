@@ -151,7 +151,7 @@ class audio {
         return $records;
     }
     // Get input from user and handle new file upload, creating new record in the DB //
-    function upload() {
+    function new_upload() {
         $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);	
 	    $artist = filter_var($_POST['artist'], FILTER_SANITIZE_STRING);
 	    $album = filter_var($_POST['album'], FILTER_SANITIZE_STRING);

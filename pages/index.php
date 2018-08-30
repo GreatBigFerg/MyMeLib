@@ -10,6 +10,9 @@ $name = $_SESSION["name"];
 $audio = new audio();
 $video = new video();
 
+$view = "audio";
+$upload_filetype = "audio";
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C/DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,7 +27,7 @@ $video = new video();
 			top: 0px;
 			right: 0px;
 			left: 0px;
-			background-color: rgba(0, 204, 0, 0.65);
+			background-color: rgba(0, 204, 0, 0.75);
 			padding: 5px;
 			margin: 0px 0px 8px 0px;
 		}
@@ -44,8 +47,8 @@ $video = new video();
 		#music-library {
 			border-radius: 25px;
 			box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.75);
-			margin-bottom: 45px;
-			margin-top: 25px;
+			margin: 25px 5px 45px;
+			padding: 6px;
 		}
 		#music-library::before {			
 			content: "MUSIC";
@@ -61,36 +64,37 @@ $video = new video();
 			background-color: white;
 		}
 		.row:nth-child(even) {
-			background: gainsboro;
+			background: rgba(0, 0, 0, 0.025);
+		}
+		.row-label {
+			border-bottom: 0.5px solid black;
+			margin-bottom: 2px;
 		}
 		.column {
 			display: inline-block;
-			border: 1px solid black;
-			border-top: none;
-			border-bottom: none;
 			padding: 2px 4px;
 			font-size: 18px;
 		}
 		.column-label {
-			border: 1px solid black;
-			border-top: none;
-			border-bottom: none;
-			margin-bottom: 2px;
+			border-bottom: 1px solid black;			
+			padding-left: 6px;
 			font-weight: 700;
-			font-size: 21px;
-			text-align: center;
+			font-size: 20px;
+			text-align: left;
+			text-transform: uppercase;
+			text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
 		}
 		.title {
-			width: 150px;			
+			min-width: 200px;			
 		}
 		.artist {
-			width: 150px;
+			min-width: 175px;
 		}
 		.album {
-			width: 100px;			
+			min-width: 175px;			
 		}
 		.genre {
-			width: 100px;
+			min-width: 150px;
 		}
 		#video-library {
 			border-radius: 25px;
@@ -105,7 +109,8 @@ $video = new video();
 			text-align:center;
 		}
 		.no-records {
-			width: 500px;
+			min-width: 500px;
+			width: 100%;
 			text-align: center;
 			font-weight: bold;			
 		}
@@ -122,14 +127,12 @@ $video = new video();
 			display: grid;
 			margin: 8px 12px;
 			grid-column: 1 / 2;
-		}
-		
+		}		
 		label {
 			grid-column: 1 / 2;
 			grid-row: 1 / 2;
 			width: 50px;
-		}
- 
+		} 
 		input, button {
 			grid-column: 2 / 3;
 			
@@ -144,61 +147,14 @@ $video = new video();
 	</style>
 </head>
 <body>
-<!-- Header & Navigation Menu -->
-<?php include("header.php"); ?>
-<!-- MUSIC -->
-<div id="music-library">
-	<div>
-		<div class="column column-label title">Title</div>
-		<div class="column column-label artist">Artist</div>
-		<div class="column column-label album">Album</div>
-		<div class="column column-label genre">Genre</div>
+	<!-- Header & Navigation Menu -->
+	<?php include("header.php"); ?>
+	<!-- MUSIC -->
+	<?php include("browse.php"); ?>
+	<!-- UPLOAD MUSIC -->
+	<div class="upload-form-container">
+		<?php include("upload.php"); ?>
 	</div>
-	<div>
-		<?php 
-        $songs = $audio->get_music_list();
-		if (!$songs) { ?>
-			<div class="row"><div class="column no-records"></div></div>
-		<?php } else {
-		foreach($songs as $song) { ?>
-			<div class="row">
-				<div class="column title"> <?php echo $song['title']; ?></div>
-				<div class="column artist"> <?php echo $song['artist']; ?></div>
-				<div class="column album"> <?php echo $song['album']; ?></div>
-				<div class="column genre"> <?php echo $song['genre']; ?></div>
-			</div>
-		<?php } } ?>
-	</div>
-    <!-- UPLOAD MUSIC -->
-    <div class="upload-form-container">
-        <?php include("../pages/upload.php"); ?>
-    </div>
-</div>
-<!-- VIDEO -->
-<div id="video-library">
-	<div>
-		<div class="column column-label title">Title</div>
-		<div class="column column-label artist">Artist</div>
-		<div class="column column-label album">Album</div>
-		<div class="column column-label genre">Genre</div>
-	</div>
-	<div>
-		<?php 
-        $videos = $video->get_video_list();
-		if (!$videos) { ?>
-			<div class="row"><div class="column no-records"></div></div>
-		<?php } else {
-		foreach($videos as $vid) { ?>
-			<div class="row">
-				<div class="column title"> <?php echo $song['title']; ?></div>
-				<div class="column artist"> <?php echo $song['artist']; ?></div>
-				<div class="column album"> <?php echo $song['album']; ?></div>
-				<div class="column genre"> <?php echo $song['genre']; ?></div>
-			</div>
-		<?php } } ?>
-	</div>
-</div>
 </body>
 </html>
 <?php
-

@@ -26,7 +26,8 @@ if ($view == "audio") {
 					<div class="column album"> <?php echo $song['album']; ?></div>
 					<div class="column genre"> <?php echo $song['genre']; ?></div>
 				</div>
-			<?php } } ?>
+			<?php } 
+			} ?>
 		</div>		
 	</div>
 	

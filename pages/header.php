@@ -6,7 +6,7 @@ $name = $_SESSION["name"];
 // 	<h2>Welcome to MyMeLib, <i style='text-decoration:underline; font-size:28px;'>". $name ."</i></h2>
 // <button id='logout' onclick=\"location.href='../scripts/logout.php'\">LOGOUT <br /> [ <i>". $usr ."</i> ]</button>
 
-echo "
+?>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 <link href='../css/header.css' rel='stylesheet'>
 
@@ -65,4 +65,4 @@ echo "
         </div>
     </div>
 </div>
-";
+<?php

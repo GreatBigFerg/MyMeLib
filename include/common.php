@@ -118,10 +118,28 @@ class audio {
         $records = array();
 		$query = mysqli_query($conn, "SELECT Genre FROM audio_data WHERE FileExists = 'true'");			    
 	    while ($rows = mysqli_fetch_array($query)) {
-		    $records[$rows['Genre']];
+			if (in_array($rows['Genre'], $records)) {
+				break;
+			} else {
+				$records[$rows['Genre']];
+			} 
 	    }
 	    return $records;
-    }
+	}
+	// Return array of all artist in the DB //
+	function get_artist_list() {
+		global $conn;
+        $records = array();
+		$query = mysqli_query($conn, "SELECT Artist FROM audio_data WHERE FileExists = 'true'");			    
+	    while ($rows = mysqli_fetch_array($query)) {
+			if (in_array($rows['Artist'], $records)) {
+				break;
+			} else {
+				$records[$rows['Artist']];
+			}  
+	    }
+	    return $records;
+	}
     // Return multi-dementianal array of songs limited by a given filter/option //
     function filter_results($filter, $option) {
         global $conn;
@@ -179,7 +197,14 @@ class audio {
     }
     // Get existing playlist from DB //
 	function playlist_existing() {
-		$temp = true;
+		global $conn;
+        $records = array();
+		$query = mysqli_query($conn, "SELECT id, PlaylistName 
+			FROM playlist_data");			    
+	    while ($rows = mysqli_fetch_array($query)) {
+		    $records[$rows['PlaylistName']];
+	    }
+	    return $records;
 	}
 	// Create new playlist of songs //
 	function playlist_create($str) {

@@ -143,6 +143,9 @@ $upload_filetype = "audio";
 			margin-top: 25px;
             background-color: darkgray;
         }
+		.audio-link {
+			cursor: pointer;
+		}
 	</style>
 </head>
 <body>

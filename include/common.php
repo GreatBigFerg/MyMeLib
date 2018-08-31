@@ -2,6 +2,18 @@
 include_once('../include/config.php');
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
+// Manages the user-interface, including hiding/showing content areas //
+class gui {
+	public $view = "audio";
+	public $upload_filetype = "audio";
+	// Switch between browsing audio & video content //
+	function set_view($str) {
+		$this->view = $str;
+		$this->upload_filetype = $str;
+		return;
+	}
+}
+ 
 // Handles the file uploading/moving of temporary file & gets file info to store in DB //
 class file_upload {
     public $file;

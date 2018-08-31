@@ -168,3 +168,8 @@ body {font-family:'Ubuntu';}
         .menu-button:hover .menu-button-label {
             display: block;
         }
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }

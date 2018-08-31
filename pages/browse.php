@@ -3,13 +3,7 @@ include_once('../include/config.php');
 include_once('../include/auth.php');
 include_once('../include/common.php');
 
-if (isset($_POST['track-select'])) {
-	$selected = array_pop($_POST['track-select']);
-	echo "<meta http-equiv='refresh' content='0'>";
-	echo "<script>alert('".$selected."');</script>";
-}
-
-if ($view == "audio") {
+if ($ui->view == "audio") {
 	?>
 	<div id="music-library">
 		<form method='post' action=''>
@@ -41,7 +35,7 @@ if ($view == "audio") {
 	</div>
 	<?php
 }
-elseif ($view == "video") {
+elseif ($ui->view == "video") {
 	?>
 	<div id="video-library">
 		<div>
@@ -67,5 +61,11 @@ elseif ($view == "video") {
 			} ?>
 		</div>
 	</div>
-	<?php
+<?php
+}
+
+if (isset($_POST['track-select'])) {
+	$selected = array_pop($_POST['track-select']);
+	echo "<meta http-equiv='refresh' content='0'>";
+	echo "<script>alert('".$selected."');</script>";
 }

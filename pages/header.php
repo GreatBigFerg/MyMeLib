@@ -1,16 +1,13 @@
 <?php
-
-$usr = $_SESSION["usr"];
-$name = $_SESSION["name"];
+include_once('../include/common.php');
 
 // 	<h2>Welcome to MyMeLib, <i style='text-decoration:underline; font-size:28px;'>". $name ."</i></h2>
 // <button id='logout' onclick=\"location.href='../scripts/logout.php'\">LOGOUT <br /> [ <i>". $usr ."</i> ]</button>
-
 ?>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 <link href='../css/header.css' rel='stylesheet'>
-
 <div id='header'>
+<form method='post' action=''>
     <div class='menu-container'>
         <div class='mul9'>
             <div class='mul9circ1'></div>
@@ -34,21 +31,15 @@ $name = $_SESSION["name"];
             <div class='menu-button-label pulse'>Home</div>
         </div>        
         <div class='menu-button'>
-            <span class='fa-stack fa-lg'>
-                <i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-file-text-o fa-stack-1x fa-inverse'></i>
-            </span>
-            <div class='menu-button-label pulse'>Files</div>
-        </div>
-        <div class='menu-button'>
-            <span class='fa-stack fa-lg'>
+            <button class='fa-stack fa-lg' type='submit' name='view-select[]' value='video'>
                 <i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-film fa-stack-1x fa-inverse'></i>
-            </span>
+            </button>
             <div class='menu-button-label pulse'>Movies</div>
         </div>
         <div class='menu-button'>
-            <span class='fa-stack fa-lg'>
+            <button class='fa-stack fa-lg' type='submit' name='view-select[]' value='audio'>
                 <i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-music fa-stack-1x fa-inverse'></i>
-            </span>
+            </button>
             <div class='menu-button-label pulse'>Music</div>
         </div>
         <div class='menu-button'>
@@ -64,5 +55,16 @@ $name = $_SESSION["name"];
             <div class='menu-button-label pulse'>Search</div>
         </div>
     </div>
+</form>
 </div>
 <?php
+
+if (isset($_POST['view-select'])) {
+    $selected = array_pop($_POST['view-select']);
+    if ($selected == "audio") {
+        $ui->set_view("audio");
+    } 
+    elseif ($selected == "video") {
+        $ui->set_view("video");
+    }
+}

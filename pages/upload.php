@@ -3,7 +3,7 @@ include_once('../include/config.php');
 include_once('../include/auth.php');
 include_once('../include/common.php');
 
-if ($upload_filetype == "audio") {
+if ($ui->upload_filetype == "audio") {
 	?>
 	<div id='upload-form'>
 		<form enctype='multipart/form-data' action='' method='post' id='upload_form' >       

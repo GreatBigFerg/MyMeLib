@@ -116,8 +116,7 @@ $upload_filetype = "audio";
 		.no-records::after {
 			content: "NO RECORDS FOUND!";
 		}
-
-        form {
+        #upload_form {
 			display: grid;
 			grid-template-columns: 50px 1fr;
 			grid-gap: 6px;
@@ -133,8 +132,7 @@ $upload_filetype = "audio";
 			width: 50px;
 		} 
 		input, button {
-			grid-column: 2 / 3;
-			
+			grid-column: 2 / 3;	
 		}
         .upload-form-container {
             border-radius: 25px;
@@ -145,6 +143,13 @@ $upload_filetype = "audio";
         }
 		.audio-link {
 			cursor: pointer;
+			background: none;
+			border: none;
+			text-align: left;
+		}
+		.audio-link:hover {
+			text-shadow: 3px 4px 2px rgba(0, 0, 0, 0.35);
+			font-weight: bold;
 		}
 	</style>
 </head>

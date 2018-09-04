@@ -104,6 +104,44 @@ class video {
 		    $records[$rows['Genre']];
 	    }
 	    return $records;
+	}
+	// Get input from user and handle new file upload, creating new record in the DB //
+    function new_upload() {
+        $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);	
+		$isseries = filter_var($_POST['isseries'], FILTER_SANITIZE_STRING);
+		if ($isseries == 1) {
+			$seriestitle = filter_var($_POST['seriestitle'], FILTER_SANITIZE_STRING);
+			$season = filter_var($_POST['season'], FILTER_SANITIZE_NUMBER_INT);
+			$episode = filter_var($_POST['episode'], FILTER_SANITIZE_NUMBER_INT);
+			$season_episode = $season."-".$episode;
+		} else {
+			$seriestitle = " ";
+			$season = " ";
+			$episode = " ";
+			$season_episode = " ";
+		}
+		
+	    $genre = filter_var($_POST['genre'], FILTER_SANITIZE_STRING);
+	    $upload = $_FILES["uploaded_file"];
+        $fu = new file_upload();
+        $fu->file = $upload;
+        if ($fu->move_upload()) {
+            $fu->file_info();
+            $fname = $fu->filename;
+            $fdir = $fu->dir;
+            $fext = $fu->ext;
+	        $sql = "INSERT INTO video_data (Title, SeriesTitle, Series-Episode, Genre, FileName, FilePath, FileFormat, FileExists) 
+                VALUES ('$title', '$seriestitle', '$season_episode', '$genre', '$fname', '$fdir', '$fext', 'true')";
+	        $query = mysqli_query($conn, $sql);
+	        if (!$query) {
+		        echo mysqli_error($conn);
+	        }
+            $msg = "File uploaded successfully!";
+        } else {
+            $msg = "An error was encountered while uploading your file, please try again.";
+        }
+	    echo "<meta http-equiv='refresh' content='0'>";
+	    echo "<script> alert('".$msg."');</script>";
     }
 }
 

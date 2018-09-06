@@ -15,7 +15,7 @@ class gui {
 }
  
 // Handles the file uploading/moving of temporary file & gets file info to store in DB //
-class file_upload {
+class upload {
     public $file;
     public $filename;
     public $filepath;
@@ -123,7 +123,7 @@ class video {
 		
 	    $genre = filter_var($_POST['genre'], FILTER_SANITIZE_STRING);
 	    $upload = $_FILES["uploaded_file"];
-        $fu = new file_upload();
+        $fu = new upload();
         $fu->file = $upload;
         if ($fu->move_upload()) {
             $fu->file_info();
@@ -225,7 +225,7 @@ class audio {
 	    $album = filter_var($_POST['album'], FILTER_SANITIZE_STRING);
 	    $genre = filter_var($_POST['genre'], FILTER_SANITIZE_STRING);
 	    $upload = $_FILES["uploaded_file"];
-        $fu = new file_upload();
+        $fu = new upload();
         $fu->file = $upload;
         if ($fu->move_upload()) {
             $fu->file_info();

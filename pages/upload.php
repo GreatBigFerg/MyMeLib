@@ -34,7 +34,6 @@ if ($ui->upload_filetype == "audio") {
 	</div>
 	<?php
 	if (!empty($_FILES['uploaded_file'])) {
-    	//$audio = new audio();
     	$audio->new_upload();
 	}
 }

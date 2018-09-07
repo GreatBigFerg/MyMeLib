@@ -40,22 +40,20 @@ elseif ($ui->view == "video") {
 	<div id="video-library">
 		<div>
 			<div class="column column-label title">Title</div>
-			<div class="column column-label artist">Artist</div>
-			<div class="column column-label album">Album</div>
+			<div class="column column-label artist">Length</div>
 			<div class="column column-label genre">Genre</div>
 		</div>
 		<div>
 			<?php 
-     	   $videos = $video->get_video_list();
-			if (!$videos) { ?>
+     	   $vids = $video->get_movie_list();
+			if (!$vids) { ?>
 				<div class="row"><div class="column no-records"></div></div>
 			<?php } else {
-			foreach($videos as $vid) { ?>
+			foreach($vids as $v_id => $movie) { ?>
 				<div class="row">
-					<div class="column title"> <?php echo $song['title']; ?></div>
-					<div class="column artist"> <?php echo $song['artist']; ?></div>
-					<div class="column album"> <?php echo $song['album']; ?></div>
-					<div class="column genre"> <?php echo $song['genre']; ?></div>
+					<div class="column title"> <?php echo $movie['title']; ?></div>
+					<div class="column artist"> <?php echo $movie['length']; ?></div>
+					<div class="column genre"> <?php echo $movie['genre']; ?></div>
 				</div>
 			<?php } 
 			} ?>

@@ -10,10 +10,10 @@ class gui {
 	function set_view($str) {
 		$this->view = $str;
 		$this->upload_filetype = $str;
-		return;
+		return $this->view;
 	}
 }
- 
+
 // Handles the file uploading/moving of temporary file & gets file info to store in DB //
 class upload {
     public $file;
@@ -29,6 +29,7 @@ class upload {
     }
     // Moves the file from temporary upload location to specified directory (Return boolean for pass/failed to move file to new location) //
     function move_upload() {
+		global $upload_dir;
         $this->filename = preg_replace("/[^A-Z0-9._-]/i", "_", $this->file["name"]);
         $this->filepath = $upload_dir . $this->filename;
         $success = move_uploaded_file($this->file["tmp_name"], $this->filepath);
@@ -42,13 +43,14 @@ class video {
     function get_movie_list() {   
 	    global $conn;
         $records = array();
-        $query = mysqli_query($conn, "SELECT id, Title, Genre FROM video_data WHERE ProgramName IS NULL AND FileExists = 'true'");
+        $query = mysqli_query($conn, "SELECT * FROM video_data WHERE FileExists = 'true'");
         if (!$query) {
 		    return false;
 	    } else {
 		    while ($rows = mysqli_fetch_array($query)) {
 			    $info = array();
-			    $info['title'] = $rows['Title'];
+				$info['title'] = $rows['Title'];
+				$info['length'] = $rows['Length'];
 			    $info['genre'] = $rows['Genre'];
 			    $records[$rows['id']] = $info;
 		    }
@@ -107,6 +109,7 @@ class video {
 	}
 	// Get input from user and handle new file upload, creating new record in the DB //
     function new_upload() {
+		global $conn;
         $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);	
 		$isseries = filter_var($_POST['isseries'], FILTER_SANITIZE_STRING);
 		if ($isseries == 1) {
@@ -120,9 +123,8 @@ class video {
 			$episode = " ";
 			$season_episode = " ";
 		}
-		
 	    $genre = filter_var($_POST['genre'], FILTER_SANITIZE_STRING);
-	    $upload = $_FILES["uploaded_file"];
+	    $upload = $_FILES["video_uploaded_file"];
         $fu = new upload();
         $fu->file = $upload;
         if ($fu->move_upload()) {
@@ -130,7 +132,7 @@ class video {
             $fname = $fu->filename;
             $fdir = $fu->dir;
             $fext = $fu->ext;
-	        $sql = "INSERT INTO video_data (Title, SeriesTitle, Series-Episode, Genre, FileName, FilePath, FileFormat, FileExists) 
+	        $sql = "INSERT INTO video_data (Title, SeriesTitle, Series_Episode, Genre, FileName, FilePath, FileFormat, FileExists) 
                 VALUES ('$title', '$seriestitle', '$season_episode', '$genre', '$fname', '$fdir', '$fext', 'true')";
 	        $query = mysqli_query($conn, $sql);
 	        if (!$query) {
@@ -220,11 +222,12 @@ class audio {
     }
     // Get input from user and handle new file upload, creating new record in the DB //
     function new_upload() {
+		global $conn;
         $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);	
 	    $artist = filter_var($_POST['artist'], FILTER_SANITIZE_STRING);
 	    $album = filter_var($_POST['album'], FILTER_SANITIZE_STRING);
 	    $genre = filter_var($_POST['genre'], FILTER_SANITIZE_STRING);
-	    $upload = $_FILES["uploaded_file"];
+	    $upload = $_FILES["audio_uploaded_file"];
         $fu = new upload();
         $fu->file = $upload;
         if ($fu->move_upload()) {
@@ -234,7 +237,7 @@ class audio {
             $fext = $fu->ext;
 	        $sql = "INSERT INTO audio_data (Title, Artist, Album, Genre, FileName, FilePath, FileFormat, FileExists) 
                 VALUES ('$title', '$artist', '$album', '$genre', '$fname', '$fdir', '$fext', 'true')";
-	        $query = mysqli_query($conn, $sql);
+			$query = mysqli_query($conn, $sql);
 	        if (!$query) {
 		        echo mysqli_error($conn);
 	        }
@@ -346,7 +349,6 @@ function died($error) {
 
 //  $df = disk_free_space("/"); // use "C:" on Windows
 //  $ds = disk_total_space("/"); // use "C:" on Windows
-
 //  $exist = file_exists($filepath);
 
 

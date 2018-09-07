@@ -8,7 +8,7 @@ if ($ui->upload_filetype == "audio") {
 	<div id='upload-form'>
 		<form enctype='multipart/form-data' action='' method='post' id='upload_form' >       
 			<div class='form-row'>
-				<input type='file' name='uploaded_file'>
+				<input type='file' name='audio_uploaded_file'>
 			</div>
 			<div class='form-row'>
 				<label>Title</label>
@@ -33,9 +33,6 @@ if ($ui->upload_filetype == "audio") {
 		</form>
 	</div>
 	<?php
-	if (!empty($_FILES['uploaded_file'])) {
-    	$audio->new_upload();
-	}
 }
 
 elseif ($ui->upload_filetype == "video") {
@@ -43,7 +40,7 @@ elseif ($ui->upload_filetype == "video") {
 	<div id='video-upload-form'>
 		<form enctype='multipart/form-data' action='' method='post' id='video_upload_form' >       
 			<div class='form-row'>
-				<input type='file' name='uploaded_file'>
+				<input type='file' name='video_uploaded_file'>
 			</div>
 			<div class='form-row'>
 				<label>Video is part of a series/TV show</label>
@@ -77,7 +74,10 @@ elseif ($ui->upload_filetype == "video") {
 		</form>
 	</div>
 	<?php
-	if (!empty($_FILES['uploaded_file'])) {
-    	$video->new_upload();
-	}
+}
+
+if (!empty($_FILES['audio_uploaded_file']) && $ui->upload_filetype == "audio") {
+	$audio->new_upload();
+} elseif (!empty($_FILES['video_uploaded_file']) && $ui->upload_filetype == "video") {
+	$video->new_upload();
 }

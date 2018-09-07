@@ -282,7 +282,7 @@ class audio {
 }
 
 // Temporary function for filtering results shown //
-function filter_results($results, $table, $filter, $option) {
+function filter_results($results, $table, $filter, $option) { 
     $array = array();
     $query_filter = "";
     switch($filter) {
@@ -312,14 +312,12 @@ function filter_results($results, $table, $filter, $option) {
     return $array;
 }
 
-//  //
+//  //  //set_error_handler("error_function"); // Set custom error handler for all errors //
 function error_function($level, $message, $file, $line, $context) {
 	if ($level == 256 || $level == 4096) {
 		error_message("Sorry, I encountered an error while completing your request", $message);
 	}
 }
-//set_error_handler("error_function"); // Set custom error handler for all errors //
-
 // Called if there is an error that needs to be brought to the users attention, such as invalid input //
 function error_message($type, $msg) {
 	echo "<script> alert('".$type.": \\n".$msg."');</script>";

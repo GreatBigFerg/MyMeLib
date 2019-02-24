@@ -109,7 +109,7 @@ a {text-decoration: none;color: #ed1b2e;}
     box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.75);
 }
 #video-library::before {			
-    content: "VIDEOS";
+    content: "MOVIES";
     font-size: 25px;
     display: block;
     margin:4px auto;
@@ -138,7 +138,7 @@ a {text-decoration: none;color: #ed1b2e;}
 label {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    width: 50px;
+    width: 100px;
 } 
 input, button {
     grid-column: 2 / 3;	
@@ -150,13 +150,13 @@ input, button {
     margin-top: 25px;
     background-color: darkgray;
 }
-.audio-link {
+.file-link {
     cursor: pointer;
     background: none;
     border: none;
     text-align: left;
 }
-.audio-link:hover {
+.file-link:hover {
     text-shadow: 3px 4px 2px rgba(0, 0, 0, 0.35);
     font-weight: bold;
 }

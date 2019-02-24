@@ -4,7 +4,8 @@ $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
 //  //
 class dir {
-    public $files = [];
+	public $files = [];
+	//  //
     function scan() {
         $iter = new DirectoryIterator($video_dir);
         foreach ($iter as $fileinfo) {
@@ -27,6 +28,11 @@ class dir {
         }
     }
 }
+
+
+//$FileSize = filesize($fpath);
+//$FileType = filetype($fpath);
+
 
 //  //
 class favorites {

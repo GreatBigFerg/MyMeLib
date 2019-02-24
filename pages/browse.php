@@ -21,12 +21,12 @@ if ($ui->view == "audio") {
 			<?php } else {
 			foreach($songs as $s_id => $song) { ?>
 				<div class="row">
-				<button class="audio-link" type='submit' name='track-select[]' value='<?php echo $s_id; ?>'>
-					<div class="column title"> <?php echo $song['title']; ?></div>
-					<div class="column artist"> <?php echo $song['artist']; ?></div>
-					<div class="column album"> <?php echo $song['album']; ?></div>
-					<div class="column genre"> <?php echo $song['genre']; ?></div>
-				</button>
+					<button class="file-link" type='submit' name='file-select[]' value='<?php echo $s_id; ?>'>
+						<div class="column title"> <?php echo $song['title']; ?></div>
+						<div class="column artist"> <?php echo $song['artist']; ?></div>
+						<div class="column album"> <?php echo $song['album']; ?></div>
+						<div class="column genre"> <?php echo $song['genre']; ?></div>
+					</button>
 				</div>
 			<?php } 
 			} ?>
@@ -38,6 +38,7 @@ if ($ui->view == "audio") {
 elseif ($ui->view == "video") {
 	?>
 	<div id="video-library">
+		<form method='post' action=''>
 		<div>
 			<div class="column column-label title">Title</div>
 			<div class="column column-label artist">Length</div>
@@ -51,19 +52,22 @@ elseif ($ui->view == "video") {
 			<?php } else {
 			foreach($vids as $v_id => $movie) { ?>
 				<div class="row">
-					<div class="column title"> <?php echo $movie['title']; ?></div>
-					<div class="column artist"> <?php echo $movie['length']; ?></div>
-					<div class="column genre"> <?php echo $movie['genre']; ?></div>
+					<button class="file-link" type='submit' name='file-select[]' value='<?php echo $v_id; ?>'>
+						<div class="column title"> <?php echo $movie['title']; ?></div>
+						<div class="column artist"> <?php echo $movie['length']; ?></div>
+						<div class="column genre"> <?php echo $movie['genre']; ?></div>
+					</button>
 				</div>
 			<?php } 
 			} ?>
 		</div>
+		</form>
 	</div>
 <?php
 }
 
-if (isset($_POST['track-select'])) {
-	$selected = array_pop($_POST['track-select']);
+if (isset($_POST['file-select'])) {
+	$selected = array_pop($_POST['file-select']);
 	echo "<meta http-equiv='refresh' content='0'>";
 	echo "<script>alert('".$selected."');</script>";
 }

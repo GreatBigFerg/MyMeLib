@@ -144,7 +144,11 @@ class video {
         }
 	    echo "<meta http-equiv='refresh' content='0'>";
 	    echo "<script> alert('".$msg."');</script>";
-    }
+	}
+	// //
+	//function edit_record() {
+
+	//}
 }
 
 // Handles audio-specific operations //

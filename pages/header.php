@@ -7,47 +7,54 @@ include_once('../include/common.php');
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 <link href='../css/header.css' rel='stylesheet'>
 <div id='header'>
-    <form method='post' action=''>
+    <!--<form method='post' action=''>-->
         <div class='menu-container'>
             <div id="home" class="menu-button home-button">
-                <button>
-                    <label id="home-label">MyMeLib</label>
-                    <i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-home fa-stack-1x fa-inverse'></i>
-                </button>
+                <div id="home-fbox">
+                    <button class='fa-stack fa-lg' type='submit' name='view-select[]' value='home'>
+                        <label id="home-label">MyMeLib</label>
+                        <i class='fa fa-home menu-icon'></i>
+                    </button>
+                </div>
             </div>
             <div id="movie" class="menu-button">                   
-                <button class='fa-stack fa-lg' type='submit' name='view-select[]' value='video'>
-                    <i class='fa fa-circle fa-stack-2x menu-icon'></i><i class='fa fa-film fa-stack-1x fa-inverse'></i>
+                <button class='fa-stack fa-lg' type='submit' name='view-select[]' value='movie'> <!-- video -->
+                    <i class='fa fa-film menu-icon'></i>
                     <label>Movies</label>
                 </button>   
             </div>
             <div id="music" class="menu-button">                   
-                <button class='fa-stack fa-lg' type='submit' name='view-select[]' value='audio'>
-                    <i class='fa fa-circle fa-stack-2x menu-icon'></i><i class='fa fa-music fa-stack-1x fa-inverse'></i>
+                <button class='fa-stack fa-lg' type='submit' name='view-select[]' value='music'> <!-- audio -->
+                    <i class='fa fa-music menu-icon'></i>
                     <label>Music</label>
                 </button>
             </div>
             <div id="photo" class="menu-button">
-                <button class='fa-stack fa-lg' type='submit' name='view-select[]' value=''>
-                    <i class='fa fa-circle fa-stack-2x menu-icon'></i><i class='fa fa-music fa-stack-1x fa-inverse'></i>
+                <button class='fa-stack fa-lg' type='submit' name='view-select[]' value='photo'>
+                    <i class='fa fa-picture-o menu-icon'></i>
                     <label>Photos</label>
                 </button>
             </div>
             <div id="other" class="menu-button">
-                <button class='fa-stack fa-lg' type='submit' name='view-select[]' value=''>
-                    <i class='fa fa-circle fa-stack-2x menu-icon'></i><i class='fa fa-music fa-stack-1x fa-inverse'></i>
+                <button class='fa-stack fa-lg' type='submit' name='view-select[]' value='other'>
+                    <i class='fa fa-search menu-icon'></i>
                     <label>Other</label>
                 </button>               
             </div>
             <div id="more" class="menu-button">
-                <button class='fa-stack fa-lg' type='submit' name='view-select[]' value=''>
-                    <i class='fa fa-circle fa-stack-2x menu-icon'></i><i class='fa fa-music fa-stack-1x fa-inverse'></i>
+                <button class='fa-stack fa-lg' type='submit' name='view-select[]' value='more'>
+                    <i class='fa fa-music menu-icon'></i>
                     <label>More</label>
                 </button>               
             </div>
         </div>
-    </form>
+    <!--</form>-->
 </div>
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
 <?php
 
 if (isset($_POST['view-select'])) {

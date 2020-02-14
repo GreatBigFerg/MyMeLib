@@ -27,10 +27,11 @@ $ui = new gui();
 	<?php include("header.php"); ?>
 	<!-- BROWSE MUSIC -->
 	<?php include("browse.php"); ?>
-	<!-- UPLOAD MUSIC -->
+	<!-- UPLOAD MUSIC 
 	<div class="upload-form-container">
-		<?php include("upload.php"); ?>
+		<?php /* include("upload.php"); */ ?>
 	</div>
+	-->
 </body>
 </html>
 <?php

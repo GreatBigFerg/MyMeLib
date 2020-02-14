@@ -123,7 +123,7 @@ body {font-family:'Ubuntu';}
             left:0;
             cursor:pointer;
         }
-        .menu-button-label {
+        label {
             display: none;
             position: absolute;
             top: 10%;
@@ -173,3 +173,32 @@ body {font-family:'Ubuntu';}
             border: none;
             cursor: pointer;
         }
+
+
+
+
+.home-button {
+    color: black;
+    
+}
+#home-label {
+    color: black;
+}
+#home {
+    color: black;
+}
+#movie {
+    color: black;
+}
+#music {
+    color: black;
+}
+#photo {
+    color: black;
+}
+#other {
+    color: black;
+}
+#more {
+    color: black;
+}

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../include/login.php');
+include('./include/login.php');
 
 if(isset($_SESSION["usr"])){
 	header("location: pages/index.php");
@@ -23,7 +23,7 @@ if(isset($_SESSION["usr"])){
 <label>Password :</label>
 <input id="password" name="password" placeholder="**********" type="password">
 <input name="submit" type="submit" value=" Login ">
-<span><?php echo $error; ?></span>
+<span><?php /* echo $error; */ ?></span>
 </form>
 </div>
 </div>

@@ -1,11 +1,3 @@
-body,
-html {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
 body {
     font-family: 'Ubuntu';
 }
@@ -243,7 +235,6 @@ body {
     align-items: center;
     justify-content: flex-end;
     flex-direction: row;
-    padding: 10px 15px;
     border: #FF00FF 1px solid;
 }
 
@@ -255,6 +246,8 @@ body {
     cursor: pointer;
     min-width: 150px;
     border: #333 1px solid;
+    padding: 5px 15px;
+    width: auto;
 }
 
 .menu-icon {
@@ -265,7 +258,7 @@ body {
 label {
     position: absolute;
     top: 10%;
-    left: 25px;
+    left: 50%;
     font-size: 18px;
     text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.75);
 }
@@ -315,8 +308,9 @@ label {
 
 button {
     background: none;
-    border: none;
+    border: #FF00FF 1px solid;
     cursor: pointer;
+    width: auto;
 }
 
 
@@ -328,11 +322,12 @@ button {
     align-self: flex-start;
     flex-grow: 2;
     justify-content: flex-start;
+    display: flex;
+    justify-content: flex-start;
 }
 
 #home-fbox {
-    display: flex;
-    justify-content: flex-start;
+    text-align: left;
 }
 
 #home-label {

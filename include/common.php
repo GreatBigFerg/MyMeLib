@@ -287,6 +287,7 @@ class audio {
 
 // Temporary function for filtering results shown //
 function filter_results($results, $table, $filter, $option) { 
+	global $conn;
     $array = array();
     $query_filter = "";
     switch($filter) {
@@ -356,6 +357,7 @@ function died($error) {
 
 // Download DB info as CSV file //
 function create_csv() {
+	global $conn;
 	$sql="SELECT * FROM active_requests";
 	$result = mysqli_query($conn, $sql);
 	$num_column = mysqli_num_fields($result);		

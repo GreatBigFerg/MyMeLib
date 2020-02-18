@@ -9,8 +9,8 @@ include_once('../include/common.php');
 <div id='header'>
     <form method='post' action=''>
         <div class='menu-container'>
-            <div id="home" class="menu-button home-button">
-                <button id="home-fbox" class="menu-button" type='submit' name='view-select[]' value='home'>
+            <div class="home-button">
+                <button id="home" class="menu-button" type='submit' name='view-select[]' value='home'>
                     <i class='fa fa-home menu-icon'></i>
                     <label id="home-label">MyMeLib</label>                   
                 </button>
@@ -34,6 +34,9 @@ include_once('../include/common.php');
             <button id="more" class="menu-button" type='submit' name='view-select[]' value='more'>
                 <i class='fa fa-music menu-icon'></i>
                 <label>More</label>
+                <div class='menu-dropdown'>
+                    <div class='menu-dropdown-item' onclick="location.href='./pages/profile.php'">Edit Profile</div>
+                </div>
             </button>
         </div>
     </form>

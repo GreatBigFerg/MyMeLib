@@ -5,8 +5,9 @@ $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 //  //
 class dir {
 	public $files = [];
+	
 	//  //
-    function scan() {
+    function scan($video_dir) {
         $iter = new DirectoryIterator($video_dir);
         foreach ($iter as $fileinfo) {
             if (!$fileinfo->isDir() || $fileinfo->isDot()) continue;

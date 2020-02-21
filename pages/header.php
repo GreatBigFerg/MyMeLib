@@ -6,7 +6,7 @@ include_once('../include/common.php');
 ?>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 <link href='../css/header.css' rel='stylesheet'>
-<div id='header'>
+<div id='header' class="<?php echo $ui->mode ?>">
     <form method='post' action=''>
         <div class='menu-container'>
             <div class="home-button">
@@ -35,7 +35,13 @@ include_once('../include/common.php');
                 <i class='fa fa-music menu-icon'></i>
                 <label>More</label>
                 <div class='menu-dropdown'>
+                    <div class='menu-dropdown-item' onclick="location.href='./pages/profile.php'">Recently Added</div>
+                    <div class='menu-dropdown-item' onclick="location.href='./pages/profile.php'">Favorites</div>
                     <div class='menu-dropdown-item' onclick="location.href='./pages/profile.php'">Edit Profile</div>
+                    <div class='menu-dropdown-item' onclick="location.href='./pages/profile.php'">Logout</div>
+                    <div class='menu-dropdown-item' type='submit' name='view-select[]' value='theme-dark'>Dark Theme</div>  
+                    <button class='menu-dropdown-item' type='submit' name='view-select[]' value='theme-light'>Light Theme</button>               
+                    <!-- <div class='menu-dropdown-item' onclick="location.href='./pages/profile.php'"></div> -->
                 </div>
             </button>
         </div>
@@ -55,6 +61,12 @@ if (isset($_POST['view-select'])) {
     } 
     elseif ($selected == "video") {
         $ui->set_view("video");
+    }
+    elseif ($selected == "theme-dark") {
+        $ui->set_mode("theme-dark");
+    }
+    elseif ($selected == "theme-light") {
+        $ui->set_mode("theme-light");
     }
 }
 

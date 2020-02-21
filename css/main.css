@@ -9,9 +9,8 @@ body, html {
 html {font-size: 100%;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;}
 body {
     font: 14px/24px Roboto, Arial, Helvetica, sans-serif;
-    background: #fff;
     text-align: center;
-    color: #636363;
+    
 }
 
 p, h1, h2, h3, h4, h5, h6, form, table, hr, pre, blockquote {margin: 0 0 20px;}
@@ -24,8 +23,27 @@ h6 {font-size: 12px;}
 ul, ol, dl, menu {margin: 0 0 20px;}
 
 a {text-decoration: none;color: #ed1b2e;}
-    a:focus {outline: thin dotted;}
-    a:active, a:hover {text-decoration: underline;}
+a:focus {outline: thin dotted;}
+a:active, a:hover {text-decoration: underline;}
+
+
+
+.theme-dark {
+    background: black;
+    color: #fff;
+}
+.theme-dark body{
+    background: black;
+    color: #fff;
+}
+
+.theme-light {
+    background: #fff;
+    color: #636363;
+}
+
+
+
 #header {
     position: sticky;
     top: 0px;
@@ -54,23 +72,67 @@ a {text-decoration: none;color: #ed1b2e;}
     cursor: pointer;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.75);
 }
-#music-library {
+
+/*  */
+
+.browse {
+    text-align: center;
     border-radius: 25px;
     box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.75);
     margin: 25px 5px 45px;
     padding: 6px;
 }
+
+.library-title {
+    text-align: center;
+    display: block;
+    font-size: 25px;
+    width: 100%;
+}
+
+.library-form {
+    border-radius: 25px;
+    box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.75);
+    margin: 25px 5px 45px;
+    padding: 6px;
+    max-width: 1200px;
+    min-width: 1000px;
+    width: auto;
+}
+
+#music-library {
+    display: flex;
+    justify-content: center;
+}
+/*
 #music-library::before {
     content: "MUSIC";
     font-size: 25px;
     display: block;
     margin:4px auto 8px;
     text-align:center;
-}		
+}*/
+
+#video-library {
+    display: flex;
+    justify-content: center;
+}
+/*
+#video-library::before {			
+    content: "MOVIES";
+    font-size: 25px;
+    display: block;
+    margin:4px auto;
+    margin-bottom: 6px;
+    text-align:center;
+}
+*/
+
+
 .row {
     margin: 6px auto;
     border: 0px solid black;
-    background-color: white;
+    
 }
 .row:nth-child(even) {
     background: rgba(0, 0, 0, 0.025);
@@ -92,6 +154,7 @@ a {text-decoration: none;color: #ed1b2e;}
     text-transform: uppercase;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
 }
+
 .title {
     min-width: 200px;			
 }
@@ -104,18 +167,7 @@ a {text-decoration: none;color: #ed1b2e;}
 .genre {
     min-width: 150px;
 }
-#video-library {
-    border-radius: 25px;
-    box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.75);
-}
-#video-library::before {			
-    content: "MOVIES";
-    font-size: 25px;
-    display: block;
-    margin:4px auto;
-    margin-bottom: 6px;
-    text-align:center;
-}
+
 .no-records {
     min-width: 500px;
     width: 100%;
@@ -157,6 +209,35 @@ input, button {
     text-align: left;
 }
 .file-link:hover {
-    text-shadow: 3px 4px 2px rgba(0, 0, 0, 0.35);
+    text-shadow: 2px 3px 1px rgba(255, 255, 255, 0.35);
     font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.25);
 }
+
+.theme-dark .row{
+    background-color: rgba(255, 255, 255, 0.75);
+}
+.theme-dark .row:nth-child(even) {
+    background: rgba(255, 255, 255, 0.5);
+}
+.theme-dark .browse {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 1px 1px 6px 2px rgba(255, 255, 255, 0.75);
+}
+.theme-dark .library-form {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 1px 1px 6px 2px rgba(255, 255, 255, 0.75);
+}
+
+
+
+
+
+
+/*
+
+.theme-dark {
+    
+}
+
+*/

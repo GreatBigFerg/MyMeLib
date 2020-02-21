@@ -4,6 +4,7 @@ $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
 // Manages the user-interface, including hiding/showing content areas //
 class gui {
+	public $mode = "theme-dark"; // theme-light //
 	public $view = "audio";
 	public $upload_filetype = "audio";
 	// Switch between browsing audio & video content //
@@ -11,6 +12,14 @@ class gui {
 		$this->view = $str;
 		$this->upload_filetype = $str;
 		return $this->view;
+	}
+	function set_mode($str) {
+		$this->mode = $str;
+		return $this->mode;
+	}
+	function get_mode() {
+		echo $this->mode;
+		return $this->mode;
 	}
 }
 

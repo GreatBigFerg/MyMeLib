@@ -11,6 +11,8 @@ $audio = new audio();
 $video = new video();
 $ui = new gui();
 
+$ui->get_mode();
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C/DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -22,7 +24,7 @@ $ui = new gui();
 	<link rel="icon" type="image/png" href="favicon.png" />
 	<link href='../css/main.css' rel='stylesheet'>
 </head>
-<body>
+<body class="<?php echo $ui->mode ?>">
 	<!-- Header & Navigation Menu -->
 	<?php include("header.php"); ?>
 	<!-- BROWSE MUSIC -->

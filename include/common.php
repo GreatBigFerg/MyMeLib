@@ -21,6 +21,9 @@ class gui {
 		echo $this->mode;
 		return $this->mode;
 	}
+	function __construct() {
+		return $this->mode;
+	}
 }
 
 // Handles the file uploading/moving of temporary file & gets file info to store in DB //
